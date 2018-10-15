@@ -33437,8 +33437,20 @@ var Store = function (_React$Component) {
       var date = _ref.date,
           events = _ref.events;
 
+      var rooms = ['Sala Tapioca', 'Sala Rapadura', 'Sala Macaxeira', 'Sala Jerimum'].reverse();
       var filteredEvents = events.filter(function (event) {
         return _this2.state.typeFilter.includes(event.details.eventType) && (!event.details.category || _this2.state.categoryFilter.includes(event.details.category)) && (!_this2.state.searchFilter || _this2.checkSearchMatch(event));
+      });
+
+      filteredEvents.sort(function (a, b) {
+        var roomA = rooms.indexOf(a.location);
+        var roomB = rooms.indexOf(b.location);
+
+        if (roomA === roomB) {
+          return 0;
+        }
+
+        return roomA > roomB ? 1 : -1;
       });
       if (filteredEvents.length) return [].concat(_toConsumableArray(acc), [{ date: date, events: filteredEvents }]);
       return acc;
@@ -36658,12 +36670,12 @@ var Schedule = function (_React$Component) {
                   { key: label },
                   _this2.renderDay(day, label)
                 );
-              }),
-              _react2.default.createElement(
-                'p',
-                { 'class': 'schedule_subtitle' },
-                '*Programa\xE7\xE3o sujeita a altera\xE7\xE3o sem aviso pr\xE9vio*'
-              )
+              })
+            ),
+            _react2.default.createElement(
+              'p',
+              { 'class': 'schedule_subtitle', style: Object.assign({}, _this2.styles.default, _this2.styles[animationState]) },
+              '*Programa\xE7\xE3o sujeita a altera\xE7\xE3o sem aviso pr\xE9vio*'
             )
           );
         }
@@ -39698,6 +39710,16 @@ var EventTypes = function EventTypes(event) {
       'h4',
       { className: 'schedule_office' },
       event.details.title
+    ),
+    _react2.default.createElement(
+      'h4',
+      { className: 'schedule_location' },
+      _react2.default.createElement(
+        'i',
+        { className: 'material-icons' },
+        'location_on'
+      ),
+      event.location
     )
   )), _defineProperty(_ref, 'Tutorial', _react2.default.createElement(
     _react2.default.Fragment,
@@ -39722,6 +39744,16 @@ var EventTypes = function EventTypes(event) {
       'h4',
       { className: 'schedule_office' },
       event.details.title
+    ),
+    _react2.default.createElement(
+      'h4',
+      { className: 'schedule_location' },
+      _react2.default.createElement(
+        'i',
+        { className: 'material-icons' },
+        'location_on'
+      ),
+      event.location
     )
   )), _defineProperty(_ref, 'Keynote', _react2.default.createElement(
     _react2.default.Fragment,
@@ -39745,6 +39777,16 @@ var EventTypes = function EventTypes(event) {
       'h4',
       { className: 'schedule_office' },
       event.details.title
+    ),
+    _react2.default.createElement(
+      'h4',
+      { className: 'schedule_location' },
+      _react2.default.createElement(
+        'i',
+        { className: 'material-icons' },
+        'location_on'
+      ),
+      event.location
     )
   )), _defineProperty(_ref, 'Sprints', _react2.default.createElement(
     _react2.default.Fragment,
@@ -39758,6 +39800,16 @@ var EventTypes = function EventTypes(event) {
       'h3',
       { className: 'schedule_speaker' },
       event.details.description
+    ),
+    _react2.default.createElement(
+      'h4',
+      { className: 'schedule_location' },
+      _react2.default.createElement(
+        'i',
+        { className: 'material-icons' },
+        'location_on'
+      ),
+      event.location
     )
   )), _ref;
 };

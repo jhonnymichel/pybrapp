@@ -1,2 +1,8 @@
+node_modules/
+dist/
+npm-debug.log
 .DS_Store
-node_modules
+*.swp
+*.orig
+**/**/*.swp
+src/config.js
