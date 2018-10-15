@@ -66,6 +66,7 @@
         "moment-timezone": "^0.5.21",
         "react": "^16.4.2",
         "react-dom": "^16.4.2",
+        "react-long": "^1.1.5",
         "react-sticky": "^6.0.3",
         "react-transition-group": "^2.5.0"
     },

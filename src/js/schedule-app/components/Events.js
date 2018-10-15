@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { getFormattedTime } from 'app/schedule-app/utils';
+import LongPress from 'react-long';
 
 const EventTypes = (event, favorites, toggleFavorite) => {
   const isFavorite = favorites.includes(event.id);
@@ -9,11 +10,14 @@ const EventTypes = (event, favorites, toggleFavorite) => {
   })
   return {
     ['Eventos Fixos']: (
-      <h2 onClick={() => toggleFavorite(event.id)} className={classNames('schedule_name w-100', {
+      <LongPress time={750} onLongPress={() => toggleFavorite(event.id)}>
+      <h2 className={classNames('schedule_name w-100', {
         'favorite': isFavorite
       })}>{event.summary}</h2>
+    </LongPress>
     ),
     ['Palestra']: (
+      <LongPress time={750} onLongPress={() => toggleFavorite(event.id)}>
       <div onClick={() => toggleFavorite(event.id)} className={classes}>
         <h2 className="schedule_name">
           {event.summary}
@@ -33,8 +37,10 @@ const EventTypes = (event, favorites, toggleFavorite) => {
           <i className="material-icons">location_on</i>{event.location}
         </h4>
       </div>
+    </LongPress>
     ),
     ['Tutorial']: (
+      <LongPress time={750} onLongPress={() => toggleFavorite(event.id)}>
       <div onClick={() => toggleFavorite(event.id)} className={classes}>
         <h2 className="schedule_name">
           {event.summary}
@@ -52,8 +58,10 @@ const EventTypes = (event, favorites, toggleFavorite) => {
           <i className="material-icons">location_on</i>{event.location}
         </h4>
       </div>
+</LongPress>
     ),
     ['Keynote']: (
+      <LongPress time={750} onLongPress={() => toggleFavorite(event.id)}>
       <div onClick={() => toggleFavorite(event.id)} className={classes}>
         <h2 className="schedule_name">
           {event.summary}
@@ -73,8 +81,10 @@ const EventTypes = (event, favorites, toggleFavorite) => {
           <i className="material-icons">location_on</i>{event.location}
         </h4>
       </div>
+    </LongPress>
     ),
     ['Sprints']: (
+      <LongPress time={750} onLongPress={() => toggleFavorite(event.id)}>
       <div onClick={() => toggleFavorite(event.id)} className={classes}>
         <h2 className="schedule_name">
           {event.summary}
@@ -86,6 +96,7 @@ const EventTypes = (event, favorites, toggleFavorite) => {
           <i className="material-icons">location_on</i>{event.location}
         </h4>
       </div>
+      </LongPress>
     )
   }
 };

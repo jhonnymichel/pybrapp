@@ -37617,6 +37617,10 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _utils = __webpack_require__(73);
 
+var _reactLong = __webpack_require__(478);
+
+var _reactLong2 = _interopRequireDefault(_reactLong);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -37629,143 +37633,171 @@ var EventTypes = function EventTypes(event, favorites, toggleFavorite) {
     'favorite': isFavorite
   });
   return _ref = {}, _defineProperty(_ref, 'Eventos Fixos', _react2.default.createElement(
-    'h2',
-    { onClick: function onClick() {
+    _reactLong2.default,
+    { time: 750, onLongPress: function onLongPress() {
         return toggleFavorite(event.id);
-      }, className: (0, _classnames2.default)('schedule_name w-100', {
-        'favorite': isFavorite
-      }) },
-    event.summary
-  )), _defineProperty(_ref, 'Palestra', _react2.default.createElement(
-    'div',
-    { onClick: function onClick() {
-        return toggleFavorite(event.id);
-      }, className: classes },
+      } },
     _react2.default.createElement(
       'h2',
-      { className: 'schedule_name' },
-      event.summary,
-      event.details.category && _react2.default.createElement(
-        'span',
-        { className: 'schedule_category ' + event.details.category.toLowerCase().replace(/\s/g, '-') },
-        event.details.category
-      )
-    ),
+      { className: (0, _classnames2.default)('schedule_name w-100', {
+          'favorite': isFavorite
+        }) },
+      event.summary
+    )
+  )), _defineProperty(_ref, 'Palestra', _react2.default.createElement(
+    _reactLong2.default,
+    { time: 750, onLongPress: function onLongPress() {
+        return toggleFavorite(event.id);
+      } },
     _react2.default.createElement(
-      'h3',
-      { className: 'schedule_speaker' },
-      event.details.name
-    ),
-    _react2.default.createElement(
-      'h4',
-      { className: 'schedule_office' },
-      event.details.title
-    ),
-    _react2.default.createElement(
-      'h4',
-      { className: 'schedule_location' },
+      'div',
+      { onClick: function onClick() {
+          return toggleFavorite(event.id);
+        }, className: classes },
       _react2.default.createElement(
-        'i',
-        { className: 'material-icons' },
-        'location_on'
+        'h2',
+        { className: 'schedule_name' },
+        event.summary,
+        event.details.category && _react2.default.createElement(
+          'span',
+          { className: 'schedule_category ' + event.details.category.toLowerCase().replace(/\s/g, '-') },
+          event.details.category
+        )
       ),
-      event.location
+      _react2.default.createElement(
+        'h3',
+        { className: 'schedule_speaker' },
+        event.details.name
+      ),
+      _react2.default.createElement(
+        'h4',
+        { className: 'schedule_office' },
+        event.details.title
+      ),
+      _react2.default.createElement(
+        'h4',
+        { className: 'schedule_location' },
+        _react2.default.createElement(
+          'i',
+          { className: 'material-icons' },
+          'location_on'
+        ),
+        event.location
+      )
     )
   )), _defineProperty(_ref, 'Tutorial', _react2.default.createElement(
-    'div',
-    { onClick: function onClick() {
+    _reactLong2.default,
+    { time: 750, onLongPress: function onLongPress() {
         return toggleFavorite(event.id);
-      }, className: classes },
+      } },
     _react2.default.createElement(
-      'h2',
-      { className: 'schedule_name' },
-      event.summary
-    ),
-    _react2.default.createElement(
-      'h3',
-      { className: 'schedule_speaker' },
-      'Dura\xE7\xE3o: ',
-      event.details.duration
-    ),
-    _react2.default.createElement(
-      'h3',
-      { className: 'schedule_speaker' },
-      event.details.name
-    ),
-    _react2.default.createElement(
-      'h4',
-      { className: 'schedule_office' },
-      event.details.title
-    ),
-    _react2.default.createElement(
-      'h4',
-      { className: 'schedule_location' },
+      'div',
+      { onClick: function onClick() {
+          return toggleFavorite(event.id);
+        }, className: classes },
       _react2.default.createElement(
-        'i',
-        { className: 'material-icons' },
-        'location_on'
+        'h2',
+        { className: 'schedule_name' },
+        event.summary
       ),
-      event.location
+      _react2.default.createElement(
+        'h3',
+        { className: 'schedule_speaker' },
+        'Dura\xE7\xE3o: ',
+        event.details.duration
+      ),
+      _react2.default.createElement(
+        'h3',
+        { className: 'schedule_speaker' },
+        event.details.name
+      ),
+      _react2.default.createElement(
+        'h4',
+        { className: 'schedule_office' },
+        event.details.title
+      ),
+      _react2.default.createElement(
+        'h4',
+        { className: 'schedule_location' },
+        _react2.default.createElement(
+          'i',
+          { className: 'material-icons' },
+          'location_on'
+        ),
+        event.location
+      )
     )
   )), _defineProperty(_ref, 'Keynote', _react2.default.createElement(
-    'div',
-    { onClick: function onClick() {
+    _reactLong2.default,
+    { time: 750, onLongPress: function onLongPress() {
         return toggleFavorite(event.id);
-      }, className: classes },
+      } },
     _react2.default.createElement(
-      'h2',
-      { className: 'schedule_name' },
-      event.summary,
-      event.details.category && _react2.default.createElement(
-        'span',
-        { className: 'schedule_category ' + event.details.category.toLowerCase().replace(/\s/g, '-') },
-        event.details.category
-      )
-    ),
-    _react2.default.createElement(
-      'h3',
-      { className: 'schedule_speaker' },
-      event.details.name
-    ),
-    _react2.default.createElement(
-      'h4',
-      { className: 'schedule_office' },
-      event.details.title
-    ),
-    _react2.default.createElement(
-      'h4',
-      { className: 'schedule_location' },
+      'div',
+      { onClick: function onClick() {
+          return toggleFavorite(event.id);
+        }, className: classes },
       _react2.default.createElement(
-        'i',
-        { className: 'material-icons' },
-        'location_on'
+        'h2',
+        { className: 'schedule_name' },
+        event.summary,
+        event.details.category && _react2.default.createElement(
+          'span',
+          { className: 'schedule_category ' + event.details.category.toLowerCase().replace(/\s/g, '-') },
+          event.details.category
+        )
       ),
-      event.location
+      _react2.default.createElement(
+        'h3',
+        { className: 'schedule_speaker' },
+        event.details.name
+      ),
+      _react2.default.createElement(
+        'h4',
+        { className: 'schedule_office' },
+        event.details.title
+      ),
+      _react2.default.createElement(
+        'h4',
+        { className: 'schedule_location' },
+        _react2.default.createElement(
+          'i',
+          { className: 'material-icons' },
+          'location_on'
+        ),
+        event.location
+      )
     )
   )), _defineProperty(_ref, 'Sprints', _react2.default.createElement(
-    'div',
-    { onClick: function onClick() {
+    _reactLong2.default,
+    { time: 750, onLongPress: function onLongPress() {
         return toggleFavorite(event.id);
-      }, className: classes },
+      } },
     _react2.default.createElement(
-      'h2',
-      { className: 'schedule_name' },
-      event.summary
-    ),
-    _react2.default.createElement(
-      'h3',
-      { className: 'schedule_speaker' },
-      event.details.description
-    ),
-    _react2.default.createElement(
-      'h4',
-      { className: 'schedule_location' },
+      'div',
+      { onClick: function onClick() {
+          return toggleFavorite(event.id);
+        }, className: classes },
       _react2.default.createElement(
-        'i',
-        { className: 'material-icons' },
-        'location_on'
+        'h2',
+        { className: 'schedule_name' },
+        event.summary
       ),
-      event.location
+      _react2.default.createElement(
+        'h3',
+        { className: 'schedule_speaker' },
+        event.details.description
+      ),
+      _react2.default.createElement(
+        'h4',
+        { className: 'schedule_location' },
+        _react2.default.createElement(
+          'i',
+          { className: 'material-icons' },
+          'location_on'
+        ),
+        event.location
+      )
     )
   )), _ref;
 };
@@ -39377,6 +39409,141 @@ $export($export.P, 'Array', {
 });
 
 __webpack_require__(257)('includes');
+
+/***/ }),
+/* 478 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _react = __webpack_require__(7);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }return target;
+};
+
+var _class, _temp2;
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var LongPress = (_temp2 = _class = function (_Component) {
+  _inherits(LongPress, _Component);
+
+  function LongPress() {
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, LongPress);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.shouldShortPress = true, _this.moved = false, _this.state = {
+      touch: true
+    }, _this.startTimeout = function () {
+      _this.timeout = setTimeout(_this.longPressed, _this.props.time);
+    }, _this.longPressed = function () {
+      _this.shouldShortPress = false;
+      if (_this.props.onLongPress && _this.moved === false) {
+        _this.props.onLongPress();
+      }
+    }, _this.cancelTimeout = function () {
+      clearTimeout(_this.timeout);
+    }, _this.setRef = function (ref) {
+      return _this.ref = ref;
+    }, _this.onTouchStart = function () {
+      _this.shouldShortPress = true;
+      _this.moved = false;
+      _this.startTimeout();
+    }, _this.onTouchEnd = function () {
+      _this.cancelTimeout();
+      if (_this.props.onPress && _this.shouldShortPress && _this.moved === false) {
+        _this.props.onPress();
+      }
+    }, _this.onMove = function () {
+      _this.moved = true;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  LongPress.prototype.componentDidMount = function componentDidMount() {
+    try {
+      document.createEvent('TouchEvent');
+    } catch (e) {
+      console.error('The LongPress component can be used only with touch devices.');
+      this.setState({ touch: false });
+    }
+  };
+
+  LongPress.prototype.componentWillUnmount = function componentWillUnmount() {
+    this.cancelTimeout();
+  };
+
+  LongPress.prototype.render = function render() {
+    var _props = this.props,
+        children = _props.children,
+        disabled = _props.disabled;
+    var touch = this.state.touch;
+
+    if (!touch || disabled) {
+      return children;
+    }
+
+    var props = {
+      ref: this.setRef,
+      onContextMenu: function onContextMenu(e) {
+        return e.preventDefault();
+      },
+      onTouchStart: this.onTouchStart,
+      onTouchEnd: this.onTouchEnd,
+      onTouchMove: this.onMove,
+      style: _extends({}, children.props.style, {
+        WebkitUserSelect: 'none',
+        WebkitTouchCallout: 'none'
+      })
+    };
+
+    return _react2.default.cloneElement(children, _extends({}, children.props, props));
+  };
+
+  return LongPress;
+}(_react.Component), _class.defaultProps = {
+  time: 500
+}, _temp2);
+
+exports.default = LongPress;
 
 /***/ })
 /******/ ]);
