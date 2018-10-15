@@ -11,6 +11,8 @@
   }
 }
 
+
+
 .advanced-filters {
   position: fixed;
   left: 0px;
@@ -344,6 +346,25 @@
   .schedule_info {
     padding-left: 35px;
     margin-bottom: 20px;
+    > * {
+      transition: background-color 300ms ease-in-out;
+      padding: 5px;
+    }
+    .favorite {
+      background-color: #0A1F31;
+      position: relative;
+      padding-right: 30px;
+      transition: background-color 300ms ease-in-out;
+      &:after {
+        font-family: 'Material Icons';
+        color: #f5bc8b;
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        font-size: 20px;
+        content: 'bookmark';
+      }
+    }
   }
 
   .schedule_time {

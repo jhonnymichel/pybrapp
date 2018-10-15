@@ -59,7 +59,12 @@ class Schedule extends React.Component {
         <div id={`day${label}`} >
           <DaySeparator day={label}/>
           {day.map(events => (
-            <Events scheduleInDate={events} key={getFormattedTime(events.date)} />
+            <Events
+              favorites={this.props.store.favorites}
+              scheduleInDate={events}
+              toggleFavorite={this.props.store.actions.toggleFavorite}
+              key={getFormattedTime(events.date)}
+            />
           ))}
         </div>
       )
@@ -145,7 +150,7 @@ class Schedule extends React.Component {
                   </React.Fragment>
                   ))}
               </div>
-              <p class="schedule_subtitle">
+              <p className="schedule_subtitle">
                 *Programação sujeita a alteração sem aviso prévio*
               </p>
           </React.Fragment>

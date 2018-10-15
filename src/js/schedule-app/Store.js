@@ -7,10 +7,18 @@ import mapValues from 'lodash/mapValues';
 class Store extends React.Component {
   constructor(props) {
     super(props);
+    let favorites;
+
+    try {
+      favorites = JSON.parse(localStorage.getItem('favoriteTalks')) || [];
+    } catch(e) {
+      favorites = [];
+    }
 
     this.state = {
       ...this.reduceCalendarData(props.data),
       searchFilter: '',
+      favorites,
       isShowingAdvancedFilters: false
     }
     
@@ -18,6 +26,7 @@ class Store extends React.Component {
       onCategoryFilterChange: this.onFilterChange.bind(this, 'categoryFilter'),
       onTypeFilterChange: this.onFilterChange.bind(this, 'typeFilter'),
       filterEvents: this.filterEvents.bind(this),
+      toggleFavorite: this.toggleFavorite.bind(this),
       toggleAdvancedFilters: this.toggleAdvancedFilters.bind(this),
       onSearchFilterChange: this.onSearchFilterChange.bind(this),
       checkSearchMatch: this.checkSearchMatch.bind(this),
@@ -27,7 +36,7 @@ class Store extends React.Component {
   toggleFavorite(id) {
     try {
       const favorites = JSON.parse(localStorage.getItem('favoriteTalks')) || [];
-      if (!id.includes(id)) {
+      if (!favorites.includes(id)) {
         favorites.push(id);
       } else {
         favorites.splice(favorites.indexOf(id), 1);
@@ -35,9 +44,12 @@ class Store extends React.Component {
 
       localStorage.setItem('favoriteTalks', JSON.stringify(favorites));
 
+      this.setState({ favorites });
+
     } catch(e) {
       console.error('Não foi possível salvar favoritos', e.message);
     }
+
   }
 
   reduceCalendarData(data) {
@@ -187,13 +199,14 @@ class Store extends React.Component {
   }
 
   render() {
-    const { days} = this.state;
+    const { days, favorites } = this.state;
     const filteredDays = days.isError ? {} : mapValues(days, day => day.reduce(this.actions.filterEvents, []));
     const isListEmpty = !days.isError && every(filteredDays, day => !day.length);
     return this.props.children({
       ...this.state,
       isError: days.isError,
       isListEmpty,
+      favorites,
       days: filteredDays,
       actions: this.actions
     });
