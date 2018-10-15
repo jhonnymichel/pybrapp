@@ -36630,9 +36630,25 @@ var Schedule = function (_React$Component) {
                 'div',
                 { className: 'advanced-filters', style: Object.assign({}, _this2.filtersStyles.default, _this2.filtersStyles[animationState]) },
                 _react2.default.createElement(
-                  'h2',
-                  null,
-                  'Filtrar por'
+                  'header',
+                  { className: 'app-bar' },
+                  _react2.default.createElement(
+                    'button',
+                    {
+                      onClick: store.actions.toggleAdvancedFilters,
+                      className: 'back-button'
+                    },
+                    _react2.default.createElement(
+                      'i',
+                      { className: 'material-icons' },
+                      'arrow_back_ios'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'h2',
+                    null,
+                    'Filtrar'
+                  )
                 ),
                 _react2.default.createElement(
                   'h3',
@@ -36658,7 +36674,7 @@ var Schedule = function (_React$Component) {
             ),
             _react2.default.createElement(
               'div',
-              { style: Object.assign({}, _this2.styles.default, _this2.styles[animationState]) },
+              null,
               store.isListEmpty && _react2.default.createElement(
                 'p',
                 { className: 'empty-message' },
@@ -36674,7 +36690,7 @@ var Schedule = function (_React$Component) {
             ),
             _react2.default.createElement(
               'p',
-              { 'class': 'schedule_subtitle', style: Object.assign({}, _this2.styles.default, _this2.styles[animationState]) },
+              { 'class': 'schedule_subtitle' },
               '*Programa\xE7\xE3o sujeita a altera\xE7\xE3o sem aviso pr\xE9vio*'
             )
           );

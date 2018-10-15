@@ -113,7 +113,15 @@ class Schedule extends React.Component {
                   ...this.filtersStyles.default,
                   ...this.filtersStyles[animationState]
                 }}>
-                  <h2>Filtrar por</h2>
+                  <header className="app-bar">
+                    <button
+                      onClick={store.actions.toggleAdvancedFilters}
+                      className="back-button"
+                    >
+                      <i className="material-icons">arrow_back_ios</i>
+                    </button>
+                    <h2>Filtrar</h2>
+                  </header>
                   <h3>Categoria</h3>
                   <CategoryFilter
                     categories={store.talksCategories}
@@ -128,9 +136,7 @@ class Schedule extends React.Component {
                   />
                 </div>
               </div>
-              <div style={{
-                ...this.styles.default, ...this.styles[animationState]
-              }}>
+              <div>
                 {store.isListEmpty && <p className="empty-message">Nenhum evento encontrado.</p>}
                 {map(store.days, (day, label) => (
                   <React.Fragment key={label}>
@@ -138,9 +144,7 @@ class Schedule extends React.Component {
                   </React.Fragment>
                   ))}
               </div>
-              <p class="schedule_subtitle" style={{
-                ...this.styles.default, ...this.styles[animationState]
-              }}>
+              <p class="schedule_subtitle">
                 *Programação sujeita a alteração sem aviso prévio*
               </p>
           </React.Fragment>
