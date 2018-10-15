@@ -24786,6 +24786,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _config = __webpack_require__(323);
 
 var _react = __webpack_require__(7);
@@ -24808,26 +24810,48 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ScheduleManager = function ScheduleManager() {
-  _classCallCheck(this, ScheduleManager);
+var ScheduleManager = function () {
+  _createClass(ScheduleManager, [{
+    key: 'getSchedule',
+    value: function getSchedule() {
+      var apiKey = _config.CALENDAR_CONFIG.apiKey,
+          calendarId = _config.CALENDAR_CONFIG.calendarId;
 
-  var apiKey = _config.CALENDAR_CONFIG.apiKey,
-      calendarId = _config.CALENDAR_CONFIG.calendarId;
+      var url = encodeURI('https://www.googleapis.com/calendar/v3/calendars/' + calendarId + '/events?key=' + apiKey);
 
-  var url = encodeURI('https://www.googleapis.com/calendar/v3/calendars/' + calendarId + '/events?key=' + apiKey);
+      return new Promise(function (resolve) {
+        fetch(url).then(function (r) {
+          return r.json();
+        }).then(function (r) {
+          localStorage.setItem('cachedSchedule', JSON.stringify(r));
+          resolve(r);
+        }).catch(function (e) {
+          var cachedScheduled = localStorage.getItem('cachedSchedule');
+          if (cachedScheduled) {
+            resolve(JSON.parse(cachedScheduled));
+          }
+          resolve({ isError: true });
+        });
+      });
+    }
+  }]);
 
-  fetch(url).then(function (r) {
-    return r.json();
-  }).then(function (data) {
-    _reactDom2.default.render(_react2.default.createElement(
-      _Store2.default,
-      { data: data },
-      function (store) {
-        return _react2.default.createElement(_Schedule2.default, { store: store });
-      }
-    ), document.querySelector('#schedule'));
-  });
-};
+  function ScheduleManager() {
+    _classCallCheck(this, ScheduleManager);
+
+    this.getSchedule().then(function (data) {
+      _reactDom2.default.render(_react2.default.createElement(
+        _Store2.default,
+        { data: data },
+        function (store) {
+          return _react2.default.createElement(_Schedule2.default, { store: store });
+        }
+      ), document.querySelector('#schedule'));
+    });
+  }
+
+  return ScheduleManager;
+}();
 
 exports.default = ScheduleManager;
 
@@ -33297,82 +33321,102 @@ var Store = function (_React$Component) {
   }
 
   _createClass(Store, [{
+    key: 'toggleFavorite',
+    value: function toggleFavorite(id) {
+      try {
+        var favorites = JSON.parse(localStorage.getItem('favoriteTalks')) || [];
+        if (!id.includes(id)) {
+          favorites.push(id);
+        } else {
+          favorites.splice(favorites.indexOf(id), 1);
+        }
+
+        localStorage.setItem('favoriteTalks', JSON.stringify(favorites));
+      } catch (e) {
+        console.error('Não foi possível salvar favoritos', e.message);
+      }
+    }
+  }, {
     key: 'reduceCalendarData',
     value: function reduceCalendarData(data) {
       var days = {};
       var eventTypes = ['Eventos Fixos', 'Sprints'];
       var talksCategories = [];
 
-      data.items.forEach(function (event) {
-        var startDateTime = (0, _get2.default)(event, 'start.dateTime');
-        if (!startDateTime) {
-          return;
-        }
-        var dayOfEvent = new Date(startDateTime).getDate();
-        if (!days[dayOfEvent]) days[dayOfEvent] = [];
-
-        var pybrEvent = {
-          id: event.id,
-          date: new Date(startDateTime),
-          summary: event.summary,
-          location: event.location,
-          details: {
-            eventType: event.summary === 'Sprints' ? event.summary : 'Eventos Fixos'
+      if (data.isError) {
+        days.isError = true;
+      } else {
+        data.items.forEach(function (event) {
+          var startDateTime = (0, _get2.default)(event, 'start.dateTime');
+          if (!startDateTime) {
+            return;
           }
-        };
+          var dayOfEvent = new Date(startDateTime).getDate();
+          if (!days[dayOfEvent]) days[dayOfEvent] = [];
 
-        if (event.description) {
-          var _event$description$sp = event.description.split('|').map(function (i) {
-            return i.trim();
-          }),
-              _event$description$sp2 = _toArray(_event$description$sp),
-              name = _event$description$sp2[0],
-              title = _event$description$sp2[1],
-              eventType = _event$description$sp2[2],
-              params = _event$description$sp2.slice(3);
-
-          pybrEvent.details = {
-            name: name,
-            title: title,
-            eventType: eventType
+          var pybrEvent = {
+            id: event.id,
+            date: new Date(startDateTime),
+            summary: event.summary,
+            location: event.location,
+            details: {
+              eventType: event.summary === 'Sprints' ? event.summary : 'Eventos Fixos'
+            }
           };
 
-          switch (eventType) {
-            case 'Palestra':
-              var _params = _slicedToArray(params, 1),
-                  category = _params[0];
+          if (event.description) {
+            var _event$description$sp = event.description.split('|').map(function (i) {
+              return i.trim();
+            }),
+                _event$description$sp2 = _toArray(_event$description$sp),
+                name = _event$description$sp2[0],
+                title = _event$description$sp2[1],
+                eventType = _event$description$sp2[2],
+                params = _event$description$sp2.slice(3);
 
-              pybrEvent.details.category = category;
-              !talksCategories.includes(category) && talksCategories.push(category);
-              break;
-            case 'Tutorial':
-              var _params2 = _slicedToArray(params, 3),
-                  duration = _params2[0],
-                  requirements = _params2[1],
-                  description = _params2[2];
+            pybrEvent.details = {
+              name: name,
+              title: title,
+              eventType: eventType
+            };
 
-              pybrEvent.details = Object.assign({}, pybrEvent.details, { duration: duration, requirements: requirements, description: description });
-              break;
-            case undefined:
-              pybrEvent.details = { eventType: 'Sprints', description: name };
-              break;
+            switch (eventType) {
+              case 'Palestra':
+                var _params = _slicedToArray(params, 1),
+                    category = _params[0];
+
+                pybrEvent.details.category = category;
+                !talksCategories.includes(category) && talksCategories.push(category);
+                break;
+              case 'Tutorial':
+                var _params2 = _slicedToArray(params, 3),
+                    duration = _params2[0],
+                    requirements = _params2[1],
+                    description = _params2[2];
+
+                pybrEvent.details = Object.assign({}, pybrEvent.details, { duration: duration, requirements: requirements, description: description });
+                break;
+              case undefined:
+                pybrEvent.details = { eventType: 'Sprints', description: name };
+                break;
+            }
+            if (eventType && !eventTypes.includes(eventType)) eventTypes.push(eventType);
           }
-          if (eventType && !eventTypes.includes(eventType)) eventTypes.push(eventType);
-        }
-        var eventsOnSameTime = days[dayOfEvent].find(function (h) {
-          return h.date.getTime() == pybrEvent.date.getTime();
-        });
-        if (!eventsOnSameTime) {
-          days[dayOfEvent].push({
-            date: pybrEvent.date,
-            events: [pybrEvent]
+          var eventsOnSameTime = days[dayOfEvent].find(function (h) {
+            return h.date.getTime() == pybrEvent.date.getTime();
           });
-        } else {
-          eventsOnSameTime.events.push(pybrEvent);
+          if (!eventsOnSameTime) {
+            days[dayOfEvent].push({
+              date: pybrEvent.date,
+              events: [pybrEvent]
+            });
+          } else {
+            eventsOnSameTime.events.push(pybrEvent);
+          }
+        });
+        for (var day in days) {
+          days[day].sort(this.sortByDate);
         }
-      });
-      for (var day in days) {
-        days[day].sort(this.sortByDate);
       }
       return {
         days: days,
@@ -33462,13 +33506,14 @@ var Store = function (_React$Component) {
 
       var days = this.state.days;
 
-      var filteredDays = (0, _mapValues2.default)(days, function (day) {
+      var filteredDays = days.isError ? {} : (0, _mapValues2.default)(days, function (day) {
         return day.reduce(_this3.actions.filterEvents, []);
       });
-      var isListEmpty = (0, _every2.default)(filteredDays, function (day) {
+      var isListEmpty = !days.isError && (0, _every2.default)(filteredDays, function (day) {
         return !day.length;
       });
       return this.props.children(Object.assign({}, this.state, {
+        isError: days.isError,
         isListEmpty: isListEmpty,
         days: filteredDays,
         actions: this.actions
@@ -36674,13 +36719,18 @@ var Schedule = function (_React$Component) {
             ),
             _react2.default.createElement(
               'div',
-              null,
+              { style: { paddingTop: 100 } },
               store.isListEmpty && _react2.default.createElement(
                 'p',
                 { className: 'empty-message' },
                 'Nenhum evento encontrado.'
               ),
-              (0, _map2.default)(store.days, function (day, label) {
+              store.isError && _react2.default.createElement(
+                'p',
+                { className: 'empty-message' },
+                'Houve um problema ao carregar os dados. Verifique sua conex\xE3o com a internet'
+              ),
+              !store.isError && (0, _map2.default)(store.days, function (day, label) {
                 return _react2.default.createElement(
                   _react2.default.Fragment,
                   { key: label },

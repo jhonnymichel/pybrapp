@@ -24,71 +24,91 @@ class Store extends React.Component {
     }
   }
 
+  toggleFavorite(id) {
+    try {
+      const favorites = JSON.parse(localStorage.getItem('favoriteTalks')) || [];
+      if (!id.includes(id)) {
+        favorites.push(id);
+      } else {
+        favorites.splice(favorites.indexOf(id), 1);
+      }
+
+      localStorage.setItem('favoriteTalks', JSON.stringify(favorites));
+
+    } catch(e) {
+      console.error('Não foi possível salvar favoritos', e.message);
+    }
+  }
+
   reduceCalendarData(data) {
     const days = {};
     const eventTypes = ['Eventos Fixos', 'Sprints'];
     const talksCategories = [];
 
-    data.items.forEach(event => {
-      const startDateTime = get(event, 'start.dateTime');
-      if (!startDateTime) {
-        return;
-      }
-      const dayOfEvent = new Date(startDateTime).getDate();
-      if (!days[dayOfEvent]) days[dayOfEvent] = [];
-
-      const pybrEvent = {
-        id: event.id,
-        date: new Date(startDateTime),
-        summary: event.summary,
-        location: event.location,
-        details: {
-          eventType: event.summary === 'Sprints' ? event.summary : 'Eventos Fixos'
-        }
-      }
-
-      if (event.description) {
-        const [
-          name,
-          title,
-          eventType,
-          ...params
-        ] = event.description.split('|').map(i => i.trim());
-
-        pybrEvent.details = {
-          name,
-          title,
-          eventType,
-        };
-
-        switch(eventType) {
-          case 'Palestra':
-            const [ category ] = params;
-            pybrEvent.details.category = category;
-            !talksCategories.includes(category) && talksCategories.push(category);
-            break;
-          case 'Tutorial':
-            const [ duration, requirements, description ] = params;
-            pybrEvent.details = { ...pybrEvent.details, duration, requirements, description }
-            break;
-          case undefined:
-            pybrEvent.details = { eventType: 'Sprints', description: name };
-            break;
-        }
-        if (eventType && !eventTypes.includes(eventType)) eventTypes.push(eventType);
-      }
-      const eventsOnSameTime = days[dayOfEvent].find(h => h.date.getTime() == pybrEvent.date.getTime());
-      if (!eventsOnSameTime) {
-        days[dayOfEvent].push({
-          date: pybrEvent.date,
-          events: [pybrEvent]
-        })
+      if (data.isError) {
+        days.isError = true;
       } else {
-        eventsOnSameTime.events.push(pybrEvent);
+        data.items.forEach(event => {
+        const startDateTime = get(event, 'start.dateTime');
+        if (!startDateTime) {
+          return;
+        }
+        const dayOfEvent = new Date(startDateTime).getDate();
+        if (!days[dayOfEvent]) days[dayOfEvent] = [];
+
+        const pybrEvent = {
+          id: event.id,
+          date: new Date(startDateTime),
+          summary: event.summary,
+          location: event.location,
+          details: {
+            eventType: event.summary === 'Sprints' ? event.summary : 'Eventos Fixos'
+          }
+        }
+
+        if (event.description) {
+          const [
+            name,
+            title,
+            eventType,
+            ...params
+          ] = event.description.split('|').map(i => i.trim());
+
+          pybrEvent.details = {
+            name,
+            title,
+            eventType,
+          };
+
+          switch(eventType) {
+            case 'Palestra':
+              const [ category ] = params;
+              pybrEvent.details.category = category;
+              !talksCategories.includes(category) && talksCategories.push(category);
+              break;
+            case 'Tutorial':
+              const [ duration, requirements, description ] = params;
+              pybrEvent.details = { ...pybrEvent.details, duration, requirements, description }
+              break;
+            case undefined:
+              pybrEvent.details = { eventType: 'Sprints', description: name };
+              break;
+          }
+          if (eventType && !eventTypes.includes(eventType)) eventTypes.push(eventType);
+        }
+        const eventsOnSameTime = days[dayOfEvent].find(h => h.date.getTime() == pybrEvent.date.getTime());
+        if (!eventsOnSameTime) {
+          days[dayOfEvent].push({
+            date: pybrEvent.date,
+            events: [pybrEvent]
+          })
+        } else {
+          eventsOnSameTime.events.push(pybrEvent);
+        }
+      });
+      for (const day in days) {
+        days[day].sort(this.sortByDate);
       }
-    });
-    for (const day in days) {
-      days[day].sort(this.sortByDate);
     }
     return {
       days,
@@ -168,10 +188,11 @@ class Store extends React.Component {
 
   render() {
     const { days} = this.state;
-    const filteredDays = mapValues(days, day => day.reduce(this.actions.filterEvents, []));
-    const isListEmpty = every(filteredDays, day => !day.length);
+    const filteredDays = days.isError ? {} : mapValues(days, day => day.reduce(this.actions.filterEvents, []));
+    const isListEmpty = !days.isError && every(filteredDays, day => !day.length);
     return this.props.children({
       ...this.state,
+      isError: days.isError,
       isListEmpty,
       days: filteredDays,
       actions: this.actions

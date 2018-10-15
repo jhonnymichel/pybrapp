@@ -136,9 +136,10 @@ class Schedule extends React.Component {
                   />
                 </div>
               </div>
-              <div>
+              <div style={{paddingTop: 100}}>
                 {store.isListEmpty && <p className="empty-message">Nenhum evento encontrado.</p>}
-                {map(store.days, (day, label) => (
+                {store.isError && <p className="empty-message">Houve um problema ao carregar os dados. Verifique sua conexão com a internet</p>}
+                {!store.isError && map(store.days, (day, label) => (
                   <React.Fragment key={label}>
                     {this.renderDay(day, label)}
                   </React.Fragment>

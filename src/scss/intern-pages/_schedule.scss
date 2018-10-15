@@ -211,6 +211,9 @@
     display: flex;
     flex-wrap: nowrap;
     .filter-box {
+      @media(min-width: $breakpoint-sm) {
+        padding-top: 5px;
+      }
       width: 360px;
       padding-left: 5px;
       padding-right: 5px;
