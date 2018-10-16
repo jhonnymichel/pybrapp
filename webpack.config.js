@@ -11,7 +11,6 @@ module.exports = {
   output: {
     filename: 'js/index.js',
     path: path.resolve(__dirname, 'www'),
-    publicPath: '/'
   },
   resolve: {
     alias: {
@@ -97,7 +96,7 @@ module.exports = {
               sourceMap: true, sourceMapContents: false
             }
           }
-        ]),
+        ], { publicPath: '../' }),
       }
     ]
   },

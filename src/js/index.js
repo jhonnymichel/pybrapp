@@ -22,6 +22,7 @@ class App {
   }
 
   onDeviceReady() {
+    console.log('device is ready');
     new Schedule();
   }
 }

@@ -71,6 +71,11 @@ class Schedule extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    console.log('will stop');
+    this.anchors.stop();
+  }
+
   componentDidMount() {
     const anchorsOffset = document.querySelector('.filters').getBoundingClientRect().height;
     this.anchors = new ScrollNavigation({
@@ -150,7 +155,7 @@ class Schedule extends React.Component {
                   </React.Fragment>
                   ))}
               </div>
-              <p className="schedule_subtitle">
+              <p className="schedule_subtitle" style={{marginBottom: 100}}>
                 *Programação sujeita a alteração sem aviso prévio*
               </p>
           </React.Fragment>

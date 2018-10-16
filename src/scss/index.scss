@@ -40,6 +40,7 @@
  
 .switch-wrapper > div {
   position: absolute;
+  width: 100%;
 }
 
 .tabs {
@@ -47,10 +48,32 @@
   bottom: 0px;
   left: 0px;
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
   display: flex;
-  background-color: $dark-blue;
-  padding: 10px;
-  z-index: 9999;
+  background-color: #0D273C;
+  padding: 5px 10px;
+  z-index: 99;
+  margin: 0px;
+  .tab-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-bottom: solid 5px transparent;
+    label {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    &:hover {
+      text-decoration: none;
+      color: white;
+    }
+    &.active {
+      border-bottom: solid 5px $python-yellow;
+    }
+  }
 }
 
 @mixin make-angle($color, $angle) {
@@ -127,68 +150,68 @@
 
 @font-face {
   font-family: "Advent Pro";
-  src: url("../misc/AdventPro-Thin.ttf");  // Give relative path to your css file.
+  src: url("../misc/AdventPro-Thin.ttf") format('truetype');  // Give relative path to your css file.
   font-weight: 100;
 }
 @font-face {
   font-family: "Advent Pro";
-  src: url("../misc/AdventPro-ExtraLight.ttf");  // Give relative path to your css file.
+  src: url("../misc/AdventPro-ExtraLight.ttf") format('truetype');  // Give relative path to your css file.
   font-weight: 200;
 }
 @font-face {
   font-family: "Advent Pro";
-  src: url("../misc/AdventPro-Light.ttf");  // Give relative path to your css file.
+  src: url("../misc/AdventPro-Light.ttf") format('truetype');  // Give relative path to your css file.
   font-weight: 300;
 }
 @font-face {
   font-family: "Advent Pro";
-  src: url("../misc/AdventPro-Regular.ttf");  // Give relative path to your css file.
+  src: url("../misc/AdventPro-Regular.ttf") format('truetype');  // Give relative path to your css file.
   font-weight: 400;
 }
 @font-face {
   font-family: "Advent Pro";
-  src: url("../misc/AdventPro-Medium.ttf");  // Give relative path to your css file.
+  src: url("../misc/AdventPro-Medium.ttf") format('truetype');  // Give relative path to your css file.
   font-weight: 500;
 }
 @font-face {
   font-family: "Advent Pro";
-  src: url("../misc/AdventPro-SemiBold.ttf");  // Give relative path to your css file.
+  src: url("../misc/AdventPro-SemiBold.ttf") format('truetype');  // Give relative path to your css file.
   font-weight: 600;
 }
 @font-face {
   font-family: "Advent Pro";
-  src: url("../misc/AdventPro-Bold.ttf");  // Give relative path to your css file.
+  src: url("../misc/AdventPro-Bold.ttf") format('truetype');  // Give relative path to your css file.
   font-weight: 700;
 }
 
 @font-face {
   font-family: "Nunito";
-  src: url('../misc/Nunito-ExtraLight.ttf');
+  src: url('../misc/Nunito-ExtraLight.ttf') format('truetype');
   font-weight: 200;
 }
 @font-face {
   font-family: "Nunito";
-  src: url('../misc/Nunito-Light.ttf');
+  src: url('../misc/Nunito-Light.ttf') format('truetype');
   font-weight: 300;
 }
 @font-face {
   font-family: "Nunito";
-  src: url('../misc/Nunito-Regular.ttf');
+  src: url('../misc/Nunito-Regular.ttf') format('truetype');
   font-weight: 400;
 }
 @font-face {
   font-family: "Nunito";
-  src: url('../misc/Nunito-SemiBold.ttf');
+  src: url('../misc/Nunito-SemiBold.ttf') format('truetype');
   font-weight: 500;
 }
 @font-face {
   font-family: "Nunito";
-  src: url('../misc/Nunito-Bold.ttf');
+  src: url('../misc/Nunito-Bold.ttf') format('truetype');
   font-weight: 600;
 }
 @font-face {
   font-family: "Nunito";
-  src: url('../misc/Nunito-ExtraBold.ttf');
+  src: url('../misc/Nunito-ExtraBold.ttf') format('truetype');
   font-weight: 700;
 }
 
