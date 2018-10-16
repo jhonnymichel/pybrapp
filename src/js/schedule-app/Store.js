@@ -25,6 +25,7 @@ class Store extends React.Component {
     this.actions = {
       onCategoryFilterChange: this.onFilterChange.bind(this, 'categoryFilter'),
       onTypeFilterChange: this.onFilterChange.bind(this, 'typeFilter'),
+      filterDays: this.filterDays.bind(this),
       filterEvents: this.filterEvents.bind(this),
       toggleFavorite: this.toggleFavorite.bind(this),
       toggleAdvancedFilters: this.toggleAdvancedFilters.bind(this),
@@ -179,6 +180,7 @@ class Store extends React.Component {
       .reverse();
     const filteredEvents = events.filter(event => (
       this.state.typeFilter.includes(event.details.eventType)
+        && (this.onlySaved ? this.state.favorites.includes(event.id) : true)
         && (!event.details.category || this.state.categoryFilter.includes(event.details.category))
         && (!this.state.searchFilter || this.checkSearchMatch(event))
     ));
@@ -198,9 +200,14 @@ class Store extends React.Component {
     return acc;
   }
 
+  filterDays(days, onlySaved) {
+    this.onlySaved = !!onlySaved;
+    return days.isError ? {} : mapValues(days, day => day.reduce(this.actions.filterEvents, []));
+  }
+
   render() {
     const { days, favorites } = this.state;
-    const filteredDays = days.isError ? {} : mapValues(days, day => day.reduce(this.actions.filterEvents, []));
+    const filteredDays = this.filterDays(days);
     const isListEmpty = !days.isError && every(filteredDays, day => !day.length);
     return this.props.children({
       ...this.state,
