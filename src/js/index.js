@@ -25,6 +25,10 @@ class App {
 
   onDeviceReady() {
     console.log('device is ready');
+    if (cordova.platform === 'android') {
+      StatusBar.backgroundColorByHexString("#0D273C");
+    }
+
     new Schedule();
   }
 }

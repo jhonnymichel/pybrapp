@@ -173,7 +173,7 @@ class Store extends React.Component {
         document.body.style.position = 'fixed';
         document.body.style.overflow = 'hidden';
       }
-      
+
       return {
          ...state,
         isShowingAdvancedFilters: !state.isShowingAdvancedFilters

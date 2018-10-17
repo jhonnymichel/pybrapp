@@ -53,8 +53,8 @@
     <preference name="PageLength" value="0" />
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarBackgroundColor" value="0x102E46" />
+    <preference name="StatusBarOverlaysWebView" value="true" />
+    <preference name="StatusBarBackgroundColor" value="#102E46" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="BackgroundColor" value="0x102E46" />
 </widget>

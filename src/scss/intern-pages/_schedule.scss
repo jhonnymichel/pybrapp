@@ -22,8 +22,6 @@
   }
 }
 
-
-
 .advanced-filters {
   position: fixed;
   left: 0px;
@@ -35,26 +33,35 @@
   .app-bar {
     position: relative;
     padding: 12px 0px;
+    padding-top: 20px;
     display: flex;
+    background-color: $dark-blue;
     justify-content: center;
     .back-button {
       background-color: transparent;
       border: none;
       .material-icons {
         margin-right: 5px;
+        font-size: 28px;  
+        color: white;
       }
       position: absolute;
       left: 0px;
-      top: 50%;
+      top: calc(50% + 10px);
       transform: translateY(-50%);
       margin-right: auto;
     }
     h2 {
+      color: white;
+      font-size: 22px;
       margin-bottom: 0px;
     }
   }
+  .advanced-filters-wrapper {
+    width: 100%;
+    padding: 0px 20px 20px 10px;
+  }
   background-color: white;
-  padding: 0px 20px 20px 10px;
 
   h2 {
     color: #7EC7CE;
@@ -230,6 +237,7 @@
   }
 
   .filters {
+    padding-top: 20px;
     background-color: inherit;
     color: white;
     background-color: $dark-blue;
@@ -424,11 +432,18 @@
     @extend .schedule_office;
     @extend .d-flex;
     @extend .align-items-center;
+    color: $python-yellow;
+    font-size: 11px;
+    text-transform: uppercase;
+
     .material-icons {
       font-size: inherit;
       margin-right: 5px;
+      font-size: 20px;
+      color: $light-blue;
     }
   }
+
 
   .schedule_speaker {
     font-size: 14px;

@@ -133,18 +133,20 @@ class Schedule extends React.Component {
                     </button>
                     <h2>Filtrar</h2>
                   </header>
-                  <h3>Categoria</h3>
-                  <CategoryFilter
-                    categories={store.talksCategories}
-                    filter={store.categoryFilter}
-                    onChange={store.actions.onCategoryFilterChange}
-                  />
-                  <h3>Tipo</h3>
-                  <EventTypeFilter
-                    types={store.eventTypes}
-                    filter={store.typeFilter}
-                    onChange={store.actions.onTypeFilterChange}
-                  />
+                  <div className="advanced-filters-wrapper">
+                    <h3>Categoria</h3>
+                    <CategoryFilter
+                      categories={store.talksCategories}
+                      filter={store.categoryFilter}
+                      onChange={store.actions.onCategoryFilterChange}
+                    />
+                    <h3>Tipo</h3>
+                    <EventTypeFilter
+                      types={store.eventTypes}
+                      filter={store.typeFilter}
+                      onChange={store.actions.onTypeFilterChange}
+                    />
+                  </div>
                 </div>
               </div>
               <div style={{paddingTop: 100}}>
