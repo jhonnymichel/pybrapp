@@ -84,7 +84,8 @@
     "cordova": {
         "plugins": {
             "cordova-plugin-whitelist": {},
-            "cordova-plugin-statusbar": {}
+            "cordova-plugin-statusbar": {},
+            "cordova-plugin-local-notification": {}
         },
         "platforms": [
             "browser",
