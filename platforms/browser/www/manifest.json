@@ -1,24 +1,12 @@
 {
+  "background_color": "#FFF",
+  "display": "standalone",
   "name": "HelloCordova",
   "short_name": "HelloCordova",
-  "description": "Description of your app from template",
+  "version": "io.cordova.hellocordova",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "author": "Apache Cordova Team",
+  "icons": [],
   "start_url": "index.html",
-  "scope": "index.html",
-  "icons": [
-    {
-      "src": "img/logo.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "img/splash.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
-  "default_locale": "en",
-  "display": "standalone",
-  "background_color": "#FFF",
-  "theme_color": "#000",
-  "orientation": "landscape"
+  "theme_color": "0x102E46"
 }

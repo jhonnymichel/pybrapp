@@ -1,13 +1,24 @@
 .category-filter {
   display: flex;
+  flex-direction: column;
+  display: flex;
   align-items: center;
   flex-wrap: wrap;
 
   .schedule_category {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
     background: none;
     padding: 0;
-    font-size: 12px;
-    margin-right: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: $dark-blue;
+    margin-bottom: 15px;
+    input {
+      width: 25px;
+      height: 25px;
+    }
   }
 }
 
@@ -23,7 +34,7 @@
   overflow-y: scroll;
   .app-bar {
     position: relative;
-    padding: 12px;
+    padding: 12px 0px;
     display: flex;
     justify-content: center;
     .back-button {
@@ -33,7 +44,7 @@
         margin-right: 5px;
       }
       position: absolute;
-      left: 5px;
+      left: 0px;
       top: 50%;
       transform: translateY(-50%);
       margin-right: auto;
@@ -42,15 +53,20 @@
       margin-bottom: 0px;
     }
   }
-  background-color: $light-blue;
+  background-color: white;
+  padding: 0px 20px 20px 10px;
+
   h2 {
-    font-size: 14px;
+    color: #7EC7CE;
+    font-size: 16px;
     text-transform: uppercase;
   }
 
   h3 {
-    font-family: nunito;
-    font-size: 12px;
+    font-family: Nunito;
+    font-size: 16px;
+    font-weight: 300;
+    color: $python-blue;
     display: block;
   }
 }
@@ -85,7 +101,6 @@
 }
 
 .schedule_category {
-  background: $light-blue;
   font-family: nunito;
   font-size: 10px;
   color: $dark-blue;
@@ -199,6 +214,15 @@
     left: 0px;
     width: 100%;
     z-index: 999;
+    &:before {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100px;
+      top: -100px;
+      left: 0px;
+      background-color: $dark-blue;
+    }
   }
 
   .accordion-tabs, .filter-box {

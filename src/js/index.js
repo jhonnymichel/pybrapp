@@ -9,6 +9,8 @@ import 'core-js/es6/string';
 import 'isomorphic-fetch';
 import 'scrolling-element';
 import Schedule from 'app/schedule-app';
+import initReactFastclick from 'react-fastclick';
+initReactFastclick();
 
 const routes = [
   '/codigo-de-conduta',

@@ -37,7 +37,7 @@
 .switch-wrapper {
   position: relative;
 }
- 
+
 .switch-wrapper > div {
   position: absolute;
   width: 100%;
@@ -51,6 +51,7 @@
   justify-content: space-between;
   align-items: center;
   display: flex;
+  color: white;
   background-color: #0D273C;
   padding: 5px 10px;
   z-index: 99;
@@ -60,8 +61,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: color 300ms ease-in;
     color: white;
-    border-bottom: solid 5px transparent;
+    border-bottom: solid 3px transparent;
     label {
       font-size: 14px;
       margin-bottom: 2px;
@@ -71,7 +73,12 @@
       color: white;
     }
     &.active {
-      border-bottom: solid 5px $python-yellow;
+
+    border-bottom: solid 3px $python-blue;
+      color: $python-blue;
+      &:hover {
+        color: $python-blue;
+      }
     }
   }
 }

@@ -35,9 +35,8 @@ class Schedule extends React.Component {
     return {
       default: {
         transformOrigin: 'center top',
-        overflow: 'hidden',
         pointerEvents: 'none',
-        transition: `all 300ms ease-in-out`,
+        transition: `transform 300ms ease-in-out, opacity 300ms ease-in-out`,
         transform: `translateY(-100%)`,
         opacity: 0
       },
@@ -72,11 +71,12 @@ class Schedule extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log('will stop');
+    console.log('vai desmontar');
     this.anchors.stop();
   }
 
   componentDidMount() {
+    console.log('montando');
     const anchorsOffset = document.querySelector('.filters').getBoundingClientRect().height;
     this.anchors = new ScrollNavigation({
       offset: -anchorsOffset
@@ -85,7 +85,8 @@ class Schedule extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.store.days) {
+    setTimeout(this.anchors.start.bind(this.anchors), 300);
+    if (this.props.store.days && window.location.pathname !== '/my-schedule') {
       let items = 0;
       for (let key in this.props.store.days) {
         items += this.props.store.days[key].length;
@@ -119,7 +120,7 @@ class Schedule extends React.Component {
                   >
                   </FilterBox>
                 </div>
-                <div className="advanced-filters" style={{
+                <div className="advanced-filters" aria-hidden={!store.isShowingAdvancedFilters} aria-modal="true" style={{
                   ...this.filtersStyles.default,
                   ...this.filtersStyles[animationState]
                 }}>

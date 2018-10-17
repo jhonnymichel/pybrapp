@@ -1,14 +1,16 @@
 import React from 'react';
+import Switch from 'react-switchery';
 
 export const FilterCheckbox = ({ checked, onChange, label, ...props }) => (
-  <label className="schedule_category" { ...props }>
-    <input
+  <div className="schedule_category" { ...props }>
+    <label>
+      {` ${label}`}
+    </label>
+    <Switch
       checked={checked}
-      type="checkbox"
       onChange={onChange}
-    />'
-    {` ${label}`}
-  </label>
+    />
+  </div>
 )
 
 export const EventTypeFilter = ({ types, onChange, filter }) => (
@@ -71,12 +73,12 @@ export class FilterBox extends React.Component {
               placeholder="Pesquisar palestra, autor..."
               />
               {value &&
-                <button onClick={this.clearFilter} className="filters-button--small close-button">
+                <button type="button" onClick={this.clearFilter} className="filters-button--small close-button">
                   <i className="material-icons">close</i>
                 </button>
               }
           </form>
-          <button onClick={onClick} className="filters-button">
+          <button type="button" onClick={onClick} className="filters-button">
             <i className="material-icons">filter_list</i>
           </button>
       </div>

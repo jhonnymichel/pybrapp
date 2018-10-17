@@ -161,11 +161,24 @@ class Store extends React.Component {
     })
   }
 
-  toggleAdvancedFilters() {
-    this.setState(state => ({
-      ...state,
-      isShowingAdvancedFilters: !state.isShowingAdvancedFilters
-    }))
+  toggleAdvancedFilters(e) {
+    if (e) {
+      e.preventDefault();
+    }
+    this.setState(state => {
+      if (state.isShowingAdvancedFilters) {
+        document.body.style.position = 'initial';
+        document.body.style.overflow = 'initial';
+      } else {
+        document.body.style.position = 'fixed';
+        document.body.style.overflow = 'hidden';
+      }
+      
+      return {
+         ...state,
+        isShowingAdvancedFilters: !state.isShowingAdvancedFilters
+      }
+    })
   }
 
   checkSearchMatch(event) {

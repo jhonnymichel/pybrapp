@@ -7,7 +7,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 
 
 module.exports = {
-  entry: ['./src/js/index.js', 'material-design-icons/iconfont/material-icons.css'],
+  entry: ['./src/js/index.js', 'material-design-icons/iconfont/material-icons.css', 'switchery/standalone/switchery.css'],
   output: {
     filename: 'js/index.js',
     path: path.resolve(__dirname, 'www'),

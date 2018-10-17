@@ -2,7 +2,7 @@ import { CALENDAR_CONFIG } from 'config';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Store from './Store';
-import { BrowserRouter as Router, Route, withRouter, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
 import Schedule from './components/Schedule';
 import Tabs from './components/Tabs';
@@ -29,27 +29,27 @@ class ScheduleManager {
     });
   }
 
+  handleUpdate() {
+    window.scrollTo(0, 0);
+  }
+
   constructor() {
     this.getSchedule().then(data => {
       ReactDOM.render(
           <Store data={data}>
             {store => (
-              <Router>
+              <Router onUpdate={this.handleUpdate}>
                 <React.Fragment>
-                  <AnimatedSwitch
-                    atEnter={{ opacity: 0 }}
-                    atLeave={{ opacity: 0 }}
-                    atActive={{ opacity: 1 }}
-                    className="switch-wrapper"
-                  >
-                    <Route exact path="/" render={() => <Schedule store={store} />} />
-                    <Route exact path="/index.html" render={() => <Schedule store={store} />} />
+                  <Switch>
+                    <Route exact path="/" render={() => <Schedule key={1} store={store} />} />
+                    <Route exact path="/index.html" render={() => <Schedule key={1} store={store} />} />
                     <Route exact path="/my-schedule" render={() => {
                       const days = store.actions.filterDays(store.days, true);
-                      return <Schedule store={{ ...store, days }} />
+                      return <Schedule key={2} store={{ ...store, days }} />
                     }}/>
                     <Route exact path="/settings" render={() => 'oi'} />
-                  </AnimatedSwitch>
+                    <Route render={() => <Redirect to="/"/>} />
+                  </Switch>
                   <TabsWithRouter/>
                 </React.Fragment>
               </Router>
