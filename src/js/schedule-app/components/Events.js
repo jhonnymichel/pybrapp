@@ -2,19 +2,19 @@ import React from 'react';
 import classNames from 'classnames';
 import { getFormattedTime } from 'app/schedule-app/utils';
 
-const EventTypes = (event, favorites, toggleFavorite) => {
+const EventTypes = (event, date, favorites, toggleFavorite) => {
   const isFavorite = favorites.includes(event.id);
   const classes = classNames({
     'favorite': isFavorite
   })
   return {
     ['Eventos Fixos']: (
-      <h2 onClick={() => toggleFavorite(event.id)} className={classNames('schedule_name w-100', {
+      <h2 onClick={() => toggleFavorite(event, date)} className={classNames('schedule_name w-100', {
         'favorite': isFavorite
       })}>{event.summary}</h2>
     ),
     ['Palestra']: (
-      <div onClick={() => toggleFavorite(event.id)} className={classes}>
+      <div onClick={() => toggleFavorite(event, date)} className={classes}>
         <h2 className="schedule_name">
           {event.summary}
           {event.details.category &&
@@ -35,7 +35,7 @@ const EventTypes = (event, favorites, toggleFavorite) => {
       </div>
     ),
     ['Tutorial']: (
-      <div onClick={() => toggleFavorite(event.id)} className={classes}>
+      <div onClick={() => toggleFavorite(event, date)} className={classes}>
         <h2 className="schedule_name">
           {event.summary}
         </h2>
@@ -54,7 +54,7 @@ const EventTypes = (event, favorites, toggleFavorite) => {
       </div>
     ),
     ['Keynote']: (
-      <div onClick={() => toggleFavorite(event.id)} className={classes}>
+      <div onClick={() => toggleFavorite(event, date)} className={classes}>
         <h2 className="schedule_name">
           {event.summary}
           {event.details.category &&
@@ -75,7 +75,7 @@ const EventTypes = (event, favorites, toggleFavorite) => {
       </div>
     ),
     ['Sprints']: (
-      <div onClick={() => toggleFavorite(event.id)} className={classes}>
+      <div onClick={() => toggleFavorite(event, VarDate)} className={classes}>
         <h2 className="schedule_name">
           {event.summary}
         </h2>
@@ -102,7 +102,7 @@ const Events = ({ scheduleInDate, favorites, toggleFavorite }) => (
       <div key={event.id} className={classNames('schedule_info col-xl-3 col-lg-6 col-sm-12', {
         'schedule-highlight': event.details.eventType !== 'Eventos Fixos'
       })}>
-        {EventTypes(event, favorites, toggleFavorite)[event.details.eventType]}
+        {EventTypes(event, scheduleInDate.date, favorites, toggleFavorite)[event.details.eventType]}
       </div>
     ))}
     </div>

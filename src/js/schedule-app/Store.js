@@ -3,6 +3,7 @@ import get from 'lodash/get';
 import defaultTo from 'lodash/defaultTo';
 import every from 'lodash/every';
 import mapValues from 'lodash/mapValues';
+import moment from 'moment-timezone';
 
 class Store extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class Store extends React.Component {
       favorites,
       isShowingAdvancedFilters: false
     }
-    
+
     this.actions = {
       onCategoryFilterChange: this.onFilterChange.bind(this, 'categoryFilter'),
       onTypeFilterChange: this.onFilterChange.bind(this, 'typeFilter'),
@@ -32,15 +33,78 @@ class Store extends React.Component {
       onSearchFilterChange: this.onSearchFilterChange.bind(this),
       checkSearchMatch: this.checkSearchMatch.bind(this),
     }
+
+    document.addEventListener("backbutton", () => {
+      if (this.state.isShowingAdvancedFilters) {
+        this.toggleAdvancedFilters();
+      } else {
+        window.history.back();
+      }
+    }, false);
+
   }
 
-  toggleFavorite(id) {
+  getId(eventId) {
+    try {
+      JSON.parse(localStorage.getItem('eventNotificationMap') || "{}");
+    } catch(e) {
+      localStorage.removeItem('eventNotificationMap');
+    }
+    const eventNotificationMap = JSON.parse(localStorage.getItem('eventNotificationMap') || "{}") || {};
+    if (eventNotificationMap[eventId]) {
+      return eventNotificationMap[eventId];
+    }
+    const id = Number(localStorage.getItem('notificationIdIncrementor') || 1) + 1;
+    localStorage.setItem('notificationIdIncrementor', id);
+
+    eventNotificationMap[eventId] = id;
+    localStorage.setItem('eventNotificationMap', JSON.stringify(eventNotificationMap));
+
+    return id;
+  }
+
+  getNotificationContent(event) {
+    if (event.details.eventType === 'Eventos Fixos') {
+      return {
+        title: `${event.summary}`,
+        text: 'Começa em 5 minutos.'
+      }
+    }
+
+    return {
+      title: `${event.details.eventType}: ${event.summary}`,
+      text: `Começa em 5 minutos na ${event.location}`
+    }
+  }
+
+  scheduleNotification(event, date) {
+    const tzDate = moment(date).tz('America/Fortaleza');
+    cordova.plugins.notification.local.schedule([{
+      id: this.getId(event.id),
+      ...this.getNotificationContent(event),
+      foreground: true,
+      trigger: { at: tzDate.subtract(5, 'minutes').toDate() }
+    }]);
+  }
+
+  cancelNotification(id) {
+    const eventNotificationMap = JSON.parse(localStorage.getItem('eventNotificationMap') || "{}");
+    const notificationId = eventNotificationMap[id];
+    if (notificationId) {
+      cordova.plugins.notification.local.cancel(notificationId);
+    }
+  }
+
+  toggleFavorite(event, date) {
+    const { id } = event;
     try {
       const favorites = JSON.parse(localStorage.getItem('favoriteTalks')) || [];
       if (!favorites.includes(id)) {
         favorites.push(id);
+        this.scheduleNotification(event, date);
       } else {
         favorites.splice(favorites.indexOf(id), 1);
+        this.cancelNotification(id);
       }
 
       localStorage.setItem('favoriteTalks', JSON.stringify(favorites));

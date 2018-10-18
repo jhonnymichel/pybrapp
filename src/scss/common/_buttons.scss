@@ -170,18 +170,12 @@
   @extend .justify-content-center;
   @extend .align-items-center;
   overflow: hidden;
-  background-color: white;
   margin-left: 10px;
   border: none;
-  color: $dark-blue;
-  border-radius: 50%;
-  min-width: 30px;
-  min-height: 30px;
-  width: 30px;
-  height: 30px;
+  color: white;
   i.material-icons {
     color: inherit;
-    font-size: 20px;
+    font-size: 30px;
   }
   &--small {
     @extend .filters-button;
@@ -195,9 +189,7 @@
       line-height: normal;
       font-size: 10px;
     }
-    @include color-modifiers('.filters-button', $dark-blue, $python-yellow, $light-blue);
   }
-  @include color-modifiers('.filters-button', $dark-blue, $python-yellow, $light-blue);
 }
 @media (min-width: $breakpoint-xl) {
   .tickets-button {

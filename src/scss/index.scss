@@ -53,7 +53,7 @@
   display: flex;
   color: white;
   background-color: #0D273C;
-  padding: 5px 10px;
+  padding:15px 20px;
   z-index: 99;
   margin: 0px;
   .tab-item {
@@ -63,7 +63,6 @@
     align-items: center;
     transition: color 300ms ease-in;
     color: white;
-    border-bottom: solid 3px transparent;
     label {
       font-size: 14px;
       margin-bottom: 2px;
@@ -74,7 +73,6 @@
     }
     &.active {
 
-    border-bottom: solid 3px $python-blue;
       color: $python-blue;
       &:hover {
         color: $python-blue;
@@ -154,6 +152,7 @@
 @import 'snackbar.scss';
 @import 'dropdown.scss';
 @import 'intern-pages/intern-pages.scss';
+@import 'loading-circle.scss';
 
 @font-face {
   font-family: "Advent Pro";

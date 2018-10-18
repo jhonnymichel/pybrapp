@@ -23,12 +23,23 @@ class App {
     document.addEventListener('deviceready', this.onDeviceReady.bind(this));
   }
 
+  setupNotifications() {
+    try {
+      cordova.plugins.notification.local.setDefaults({
+        led: { color: '#7FC7CF' },
+        vibrate: true
+      });
+    } catch (e) {
+      document.write(e.message);
+    }
+  }
+
   onDeviceReady() {
     console.log('device is ready');
     if (cordova.platform === 'android') {
       StatusBar.backgroundColorByHexString("#0D273C");
     }
-
+    this.setupNotifications();
     new Schedule();
   }
 }
