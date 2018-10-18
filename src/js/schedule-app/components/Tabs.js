@@ -14,7 +14,10 @@ const TabItem = ({ link, location, icon, children: text }) => (
 
 const Tabs = ({ location }) => (
   <menu className="tabs">
-    <TabItem link="/" location={location} icon="date_range">
+    <TabItem link="/" location={location} icon="schedule">
+      Agora
+    </TabItem>
+    <TabItem link="/schedule" location={location} icon="date_range">
       Programação
     </TabItem>
     <TabItem link="/my-schedule" location={location} icon="bookmark">

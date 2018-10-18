@@ -27434,6 +27434,10 @@ var _Tabs = __webpack_require__(530);
 
 var _Tabs2 = _interopRequireDefault(_Tabs);
 
+var _Now = __webpack_require__(562);
+
+var _Now2 = _interopRequireDefault(_Now);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27491,17 +27495,17 @@ var ScheduleManager = function () {
                 _reactRouterDom.Switch,
                 null,
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
-                    return _react2.default.createElement(_Schedule2.default, { key: 1, store: store });
+                    return _react2.default.createElement(_Now2.default, { store: store });
                   } }),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/index.html', render: function render() {
+                    return _react2.default.createElement(_Now2.default, { store: store });
+                  } }),
+                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/schedule', render: function render() {
                     return _react2.default.createElement(_Schedule2.default, { key: 1, store: store });
                   } }),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/my-schedule', render: function render() {
                     var days = store.actions.filterDays(store.days, true);
                     return _react2.default.createElement(_Schedule2.default, { key: 2, store: Object.assign({}, store, { days: days }) });
-                  } }),
-                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/settings', render: function render() {
-                    return 'oi';
                   } }),
                 _react2.default.createElement(_reactRouterDom.Route, { render: function render() {
                     return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
@@ -36030,22 +36034,30 @@ var Store = function (_React$Component) {
       return id;
     }
   }, {
+    key: 'getNotificationContent',
+    value: function getNotificationContent(event) {
+      if (event.details.eventType === 'Eventos Fixos') {
+        return {
+          title: '' + event.summary,
+          text: 'Começa em 5 minutos.'
+        };
+      }
+
+      return {
+        title: event.details.eventType + ': ' + event.summary,
+        text: 'Come\xE7a em 5 minutos na ' + event.location
+      };
+    }
+  }, {
     key: 'scheduleNotification',
     value: function scheduleNotification(event, date) {
       var tzDate = (0, _momentTimezone2.default)(date).tz('America/Fortaleza');
-      cordova.plugins.notification.local.schedule([{
-        id: this.getId(event.id),
-        title: Math.random(),
-        text: 'Thats pretty easy...' + Math.random(),
+      cordova.plugins.notification.local.schedule([Object.assign({
+        id: this.getId(event.id)
+      }, this.getNotificationContent(event), {
         foreground: true,
-        trigger: { in: 1, unit: 'minute' }
-      }, {
-        id: this.getId(event.id),
-        title: 'sera que vai dar bom',
-        text: 'Opa',
-        foreground: true,
-        trigger: { in: 30, unit: 'second' }
-      }]);
+        trigger: { at: tzDate.subtract(5, 'minutes').toDate() }
+      })]);
     }
   }, {
     key: 'cancelNotification',
@@ -44361,6 +44373,11 @@ var Schedule = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { style: { paddingTop: 100 } },
+              _react2.default.createElement(
+                'p',
+                { className: 'empty-message--small' },
+                window.location.pathname === 'schedule' ? 'Toque em um evento para adicioná-lo as suas marcações e receber notificações.' : 'Toque em um evento para removê-lo de sua lista e cancelar notificações.'
+              ),
               store.isListEmpty && _react2.default.createElement(
                 'p',
                 { className: 'empty-message' },
@@ -51086,7 +51103,12 @@ var Tabs = function Tabs(_ref2) {
     { className: 'tabs' },
     _react2.default.createElement(
       TabItem,
-      { link: '/', location: location, icon: 'date_range' },
+      { link: '/', location: location, icon: 'schedule' },
+      'Agora'
+    ),
+    _react2.default.createElement(
+      TabItem,
+      { link: '/schedule', location: location, icon: 'date_range' },
       'Programa\xE7\xE3o'
     ),
     _react2.default.createElement(
@@ -51578,6 +51600,152 @@ exports.push([module.i, "/*\n *\n * Main stylesheet for Switchery.\n * http://ab
 
 // exports
 
+
+/***/ }),
+/* 541 */,
+/* 542 */,
+/* 543 */,
+/* 544 */,
+/* 545 */,
+/* 546 */,
+/* 547 */,
+/* 548 */,
+/* 549 */,
+/* 550 */,
+/* 551 */,
+/* 552 */,
+/* 553 */,
+/* 554 */,
+/* 555 */,
+/* 556 */,
+/* 557 */,
+/* 558 */,
+/* 559 */,
+/* 560 */,
+/* 561 */,
+/* 562 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Events = __webpack_require__(507);
+
+var _Events2 = _interopRequireDefault(_Events);
+
+var _momentTimezone = __webpack_require__(133);
+
+var _momentTimezone2 = _interopRequireDefault(_momentTimezone);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getNow(days) {
+  var today = (0, _momentTimezone2.default)().tz('America/Fortaleza').date();
+  var day = days[today];
+  if (day) {
+    var currentDate = (0, _momentTimezone2.default)().tz('America/Fortaleza').toDate().getTime();
+
+    var _loop = function _loop(eventKey) {
+      var date = day[eventKey].date;
+
+      var nextDate = void 0;
+      if (day[eventKey + 1]) {
+        nextDate = day[eventKey + 1].date;
+      } else {
+        nextDate = { getTime: function getTime() {
+            return date.getTime() + 30 * 1000 * 1000;
+          } };
+      }
+
+      if (currentDate >= date.getTime() && currentDate < nextDate.getTime()) {
+        return {
+          v: day[eventKey]
+        };
+      }
+    };
+
+    for (var eventKey = 0; eventKey < day.length; eventKey++) {
+      var _ret = _loop(eventKey);
+
+      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+    }
+  }
+}
+
+function getNext(days) {
+  var today = (0, _momentTimezone2.default)().tz('America/Fortaleza').date();
+  var day = days[today];
+  if (day) {
+    var currentDate = (0, _momentTimezone2.default)().tz('America/Fortaleza').toDate().getTime();
+    for (var eventKey = 0; eventKey < day.length; eventKey++) {
+      if (eventKey + 1 < day.length) {
+        var _date = day[eventKey].date;
+        var _nextDate = day[eventKey + 1].date;
+
+
+        if (currentDate >= _date.getTime() && currentDate < _nextDate.getTime()) {
+          return day[eventKey + 1];
+        }
+      }
+    }
+  }
+}
+
+function EventsOrEmpty(props) {
+  if (props.scheduleInDate) {
+    return _react2.default.createElement(_Events2.default, props);
+  }
+
+  return _react2.default.createElement(
+    'h3',
+    { className: 'empty-message--small' },
+    props.emptyMessage
+  );
+}
+
+var Now = function Now(_ref) {
+  var _ref$store = _ref.store,
+      days = _ref$store.days,
+      favorites = _ref$store.favorites,
+      toggleFavorite = _ref$store.actions.toggleFavorite;
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'div',
+      { className: 'app-bar' },
+      _react2.default.createElement(
+        'h2',
+        null,
+        'Python Brasil 14'
+      )
+    ),
+    _react2.default.createElement(
+      'h3',
+      { className: 'day-separator tab-link' },
+      'Rolando agora'
+    ),
+    _react2.default.createElement(EventsOrEmpty, { emptyMessage: 'Nada rolando agora :(', scheduleInDate: getNow(days), favorites: favorites, toggleFavorite: toggleFavorite }),
+    _react2.default.createElement(
+      'h3',
+      { className: 'day-separator tab-link' },
+      'Em seguida'
+    ),
+    _react2.default.createElement(EventsOrEmpty, { emptyMessage: 'Isso \xE9 tudo por hoje, pessoal! :)', scheduleInDate: getNext(days), favorites: favorites, toggleFavorite: toggleFavorite })
+  );
+};
+
+exports.default = Now;
 
 /***/ })
 /******/ ]);

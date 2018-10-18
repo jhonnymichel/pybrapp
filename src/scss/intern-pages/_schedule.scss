@@ -22,6 +22,33 @@
   }
 }
 
+.app-bar {
+  position: relative;
+  padding: 12px 0px;
+  padding-top: 20px;
+  display: flex;
+  background-color: $dark-blue;
+  justify-content: center;
+  .back-button {
+    background-color: transparent;
+    border: none;
+    .material-icons {
+      margin-right: 5px;
+      font-size: 28px;
+      color: white;
+    }
+    position: absolute;
+    left: 0px;
+    top: calc(50% + 10px);
+    transform: translateY(-50%);
+    margin-right: auto;
+  }
+  h2 {
+    color: white;
+    font-size: 22px;
+    margin-bottom: 0px;
+  }
+}
 .advanced-filters {
   position: fixed;
   left: 0px;
@@ -30,33 +57,6 @@
   height: 100%;
   max-height: 100%;
   overflow-y: scroll;
-  .app-bar {
-    position: relative;
-    padding: 12px 0px;
-    padding-top: 20px;
-    display: flex;
-    background-color: $dark-blue;
-    justify-content: center;
-    .back-button {
-      background-color: transparent;
-      border: none;
-      .material-icons {
-        margin-right: 5px;
-        font-size: 28px;
-        color: white;
-      }
-      position: absolute;
-      left: 0px;
-      top: calc(50% + 10px);
-      transform: translateY(-50%);
-      margin-right: auto;
-    }
-    h2 {
-      color: white;
-      font-size: 22px;
-      margin-bottom: 0px;
-    }
-  }
   .advanced-filters-wrapper {
     width: 100%;
     padding: 0px 20px 20px 10px;
@@ -84,6 +84,11 @@
   text-align: center;
   color: white;
   font-size: 1.2em;
+  &--small {
+    @extend .empty-message;
+    font-size: 1em;
+    font-family: 'Nunito';
+  }
 }
 
 .Popover {

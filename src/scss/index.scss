@@ -53,10 +53,11 @@
   display: flex;
   color: white;
   background-color: #0D273C;
-  padding:15px 20px;
+  padding:15px 0px;
   z-index: 99;
   margin: 0px;
   .tab-item {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;

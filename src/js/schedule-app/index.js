@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, withRouter, Switch, Redirect } from 're
 import { AnimatedSwitch } from 'react-router-transition';
 import Schedule from './components/Schedule';
 import Tabs from './components/Tabs';
+import Now from './components/Now';
 
 const TabsWithRouter = withRouter(Tabs);
 class ScheduleManager {
@@ -41,13 +42,13 @@ class ScheduleManager {
               <Router onUpdate={this.handleUpdate}>
                 <React.Fragment>
                   <Switch>
-                    <Route exact path="/" render={() => <Schedule key={1} store={store} />} />
-                    <Route exact path="/index.html" render={() => <Schedule key={1} store={store} />} />
+                    <Route exact path="/" render={() => <Now store={store} />} />
+                    <Route exact path="/index.html" render={() => <Now store={store} />} />
+                    <Route exact path="/schedule" render={() => <Schedule key={1} store={store} />} />
                     <Route exact path="/my-schedule" render={() => {
                       const days = store.actions.filterDays(store.days, true);
                       return <Schedule key={2} store={{ ...store, days }} />
                     }}/>
-                    <Route exact path="/settings" render={() => 'oi'} />
                     <Route render={() => <Redirect to="/"/>} />
                   </Switch>
                   <TabsWithRouter/>

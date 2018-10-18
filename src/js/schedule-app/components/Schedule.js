@@ -150,6 +150,12 @@ class Schedule extends React.Component {
                 </div>
               </div>
               <div style={{paddingTop: 100}}>
+                <p className="empty-message--small">
+                  { window.location.pathname === 'schedule' ?
+                     'Toque em um evento para adicioná-lo as suas marcações e receber notificações.' :
+                     'Toque em um evento para removê-lo de sua lista e cancelar notificações.'
+                  }
+                </p>
                 {store.isListEmpty && <p className="empty-message">Nenhum evento encontrado.</p>}
                 {store.isError && <p className="empty-message">Houve um problema ao carregar os dados. Verifique sua conexão com a internet</p>}
                 {!store.isError && map(store.days, (day, label) => (
