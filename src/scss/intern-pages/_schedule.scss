@@ -23,11 +23,15 @@
 }
 
 .app-bar {
-  position: relative;
+  z-index: 999;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
   padding: 12px 0px;
   padding-top: 20px;
   display: flex;
-  background-color: $dark-blue;
+  background-color: #0d273c;
   justify-content: center;
   .back-button {
     background-color: transparent;
@@ -44,9 +48,26 @@
     margin-right: auto;
   }
   h2 {
-    color: white;
-    font-size: 22px;
-    margin-bottom: 0px;
+    color: white !important;
+    font-size: 22px !important;
+    margin-bottom: 0px !important;
+  }
+  &-compensator {
+    height: 75px;
+  }
+}
+
+.empty-list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  img {
+    width: 20%;
+  }
+  .empty-message--small {
+    margin-top: 20px;
   }
 }
 .advanced-filters {
@@ -86,7 +107,8 @@
   font-size: 1.2em;
   &--small {
     @extend .empty-message;
-    font-size: 1em;
+    color: $light-blue;
+    font-size: .8em;
     font-family: 'Nunito';
   }
 }

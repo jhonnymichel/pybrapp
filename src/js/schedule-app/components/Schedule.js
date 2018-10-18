@@ -8,6 +8,7 @@ import DaySeparator from './DaySeparator';
 import ScrollNavigation from 'scroll-navigation-menu';
 import Events from './Events';
 import Transition from 'react-transition-group/Transition';
+import EmptyList from './EmptyList';
 import { getFormattedTime } from 'app/schedule-app/utils';
 import { FilterBox, CategoryFilter, EventTypeFilter } from './filters';
 
@@ -133,6 +134,8 @@ class Schedule extends React.Component {
                     </button>
                     <h2>Filtrar</h2>
                   </header>
+                  <div className="app-bar-conpensator" aria-hidden="true">
+                  </div>
                   <div className="advanced-filters-wrapper">
                     <h3>Categoria</h3>
                     <CategoryFilter
@@ -149,15 +152,16 @@ class Schedule extends React.Component {
                   </div>
                 </div>
               </div>
-              <div style={{paddingTop: 100}}>
+              <div style={{paddingTop: 122}}>
                 <p className="empty-message--small">
-                  { window.location.pathname === 'schedule' ?
-                     'Toque em um evento para adicioná-lo as suas marcações e receber notificações.' :
-                     'Toque em um evento para removê-lo de sua lista e cancelar notificações.'
+                  { window.location.pathname === '/schedule' ?
+                     (!store.isListEmpty && 'Toque em um evento para adicioná-lo as suas marcações e receber notificações.' || '') :
+                     (store.favorites.length && 'Toque em um evento para removê-lo de sua lista e cancelar notificações.' || '')
                   }
                 </p>
-                {store.isListEmpty && <p className="empty-message">Nenhum evento encontrado.</p>}
-                {store.isError && <p className="empty-message">Houve um problema ao carregar os dados. Verifique sua conexão com a internet</p>}
+                {window.location.pathname === '/my-schedule' && !store.favorites.length && <EmptyList message="Você ainda não marcou nenhuma palestra. Na aba Palestras você pode fazer isso."/>}
+                {store.isListEmpty && <EmptyList message="Nenhum resultado encontrado. Altere os termos de sua pesquisa e cheque os filtros aplicados."/>}
+                {store.isError && <EmptyList message="Houve um problema ao carregar os dados. Verifique sua conexão com a internet"/>}
                 {!store.isError && map(store.days, (day, label) => (
                   <React.Fragment key={label}>
                     {this.renderDay(day, label)}
@@ -165,7 +169,7 @@ class Schedule extends React.Component {
                   ))}
               </div>
               <p className="schedule_subtitle" style={{marginBottom: 100}}>
-                *Programação sujeita a alteração sem aviso prévio*
+                * Programação sujeita a alteração sem aviso prévio *
               </p>
           </React.Fragment>
           )}

@@ -36289,6 +36289,7 @@ var Store = function (_React$Component) {
         isError: days.isError,
         isListEmpty: isListEmpty,
         favorites: favorites,
+        fullSchedule: days,
         days: filteredDays,
         actions: this.actions
       }));
@@ -44214,6 +44215,10 @@ var _Transition = __webpack_require__(508);
 
 var _Transition2 = _interopRequireDefault(_Transition);
 
+var _EmptyList = __webpack_require__(563);
+
+var _EmptyList2 = _interopRequireDefault(_EmptyList);
+
 var _utils = __webpack_require__(91);
 
 var _filters = __webpack_require__(511);
@@ -44344,6 +44349,7 @@ var Schedule = function (_React$Component) {
                     'Filtrar'
                   )
                 ),
+                _react2.default.createElement('div', { className: 'app-bar-conpensator', 'aria-hidden': 'true' }),
                 _react2.default.createElement(
                   'div',
                   { className: 'advanced-filters-wrapper' },
@@ -44372,22 +44378,15 @@ var Schedule = function (_React$Component) {
             ),
             _react2.default.createElement(
               'div',
-              { style: { paddingTop: 100 } },
+              { style: { paddingTop: 122 } },
               _react2.default.createElement(
                 'p',
                 { className: 'empty-message--small' },
-                window.location.pathname === 'schedule' ? 'Toque em um evento para adicioná-lo as suas marcações e receber notificações.' : 'Toque em um evento para removê-lo de sua lista e cancelar notificações.'
+                window.location.pathname === '/schedule' ? !store.isListEmpty && 'Toque em um evento para adicioná-lo as suas marcações e receber notificações.' || '' : store.favorites.length && 'Toque em um evento para removê-lo de sua lista e cancelar notificações.' || ''
               ),
-              store.isListEmpty && _react2.default.createElement(
-                'p',
-                { className: 'empty-message' },
-                'Nenhum evento encontrado.'
-              ),
-              store.isError && _react2.default.createElement(
-                'p',
-                { className: 'empty-message' },
-                'Houve um problema ao carregar os dados. Verifique sua conex\xE3o com a internet'
-              ),
+              window.location.pathname === '/my-schedule' && !store.favorites.length && _react2.default.createElement(_EmptyList2.default, { message: 'Voc\xEA ainda n\xE3o marcou nenhuma palestra. Na aba Palestras voc\xEA pode fazer isso.' }),
+              store.isListEmpty && _react2.default.createElement(_EmptyList2.default, { message: 'Nenhum resultado encontrado. Altere os termos de sua pesquisa e cheque os filtros aplicados.' }),
+              store.isError && _react2.default.createElement(_EmptyList2.default, { message: 'Houve um problema ao carregar os dados. Verifique sua conex\xE3o com a internet' }),
               !store.isError && (0, _map2.default)(store.days, function (day, label) {
                 return _react2.default.createElement(
                   _react2.default.Fragment,
@@ -44399,7 +44398,7 @@ var Schedule = function (_React$Component) {
             _react2.default.createElement(
               'p',
               { className: 'schedule_subtitle', style: { marginBottom: 100 } },
-              '*Programa\xE7\xE3o sujeita a altera\xE7\xE3o sem aviso pr\xE9vio*'
+              '* Programa\xE7\xE3o sujeita a altera\xE7\xE3o sem aviso pr\xE9vio *'
             )
           );
         }
@@ -51663,7 +51662,7 @@ function getNow(days) {
         nextDate = day[eventKey + 1].date;
       } else {
         nextDate = { getTime: function getTime() {
-            return date.getTime() + 30 * 1000 * 1000;
+            return date.getTime() + 30 * 60 * 1000;
           } };
       }
 
@@ -51715,7 +51714,7 @@ function EventsOrEmpty(props) {
 
 var Now = function Now(_ref) {
   var _ref$store = _ref.store,
-      days = _ref$store.days,
+      days = _ref$store.fullSchedule,
       favorites = _ref$store.favorites,
       toggleFavorite = _ref$store.actions.toggleFavorite;
   return _react2.default.createElement(
@@ -51730,6 +51729,7 @@ var Now = function Now(_ref) {
         'Python Brasil 14'
       )
     ),
+    _react2.default.createElement('div', { className: 'app-bar-compensator', 'aria-hidden': 'true' }),
     _react2.default.createElement(
       'h3',
       { className: 'day-separator tab-link' },
@@ -51741,11 +51741,59 @@ var Now = function Now(_ref) {
       { className: 'day-separator tab-link' },
       'Em seguida'
     ),
-    _react2.default.createElement(EventsOrEmpty, { emptyMessage: 'Isso \xE9 tudo por hoje, pessoal! :)', scheduleInDate: getNext(days), favorites: favorites, toggleFavorite: toggleFavorite })
+    _react2.default.createElement(EventsOrEmpty, { emptyMessage: 'Isso \xE9 tudo por hoje, pessoal! :)', scheduleInDate: getNext(days), favorites: favorites, toggleFavorite: toggleFavorite }),
+    _react2.default.createElement(
+      'p',
+      { className: 'empty-message' },
+      'Confira nossa programa\xE7\xE3o completa e crie seu roteiro na aba Programa\xE7\xE3o!'
+    )
   );
 };
 
 exports.default = Now;
+
+/***/ }),
+/* 563 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _loading = __webpack_require__(564);
+
+var _loading2 = _interopRequireDefault(_loading);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var EmptyList = function EmptyList(_ref) {
+  var message = _ref.message;
+  return _react2.default.createElement(
+    'div',
+    { className: 'empty-list' },
+    _react2.default.createElement('img', { src: _loading2.default, alt: 'Lista vazia' }),
+    _react2.default.createElement(
+      'p',
+      { className: 'empty-message--small' },
+      message
+    )
+  );
+};
+
+exports.default = EmptyList;
+
+/***/ }),
+/* 564 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "./assets/loading.svg";
 
 /***/ })
 /******/ ]);

@@ -13,7 +13,7 @@ function getNow(days) {
       if (day[eventKey+1]) {
         nextDate = day[eventKey+1].date;
       } else {
-        nextDate = { getTime: () => date.getTime() + 30 * 1000 * 1000 };
+        nextDate = { getTime: () => date.getTime() + 30 * 60 * 1000 };
       }
 
       if (currentDate >= date.getTime() && currentDate < nextDate.getTime()) {
@@ -53,10 +53,12 @@ function EventsOrEmpty(props) {
   )
 }
 
-const Now = ({ store: { days, favorites, actions: { toggleFavorite }} }) => (
+const Now = ({ store: { fullSchedule: days, favorites, actions: { toggleFavorite }} }) => (
   <div>
     <div className="app-bar">
       <h2>Python Brasil 14</h2>
+    </div>
+    <div className="app-bar-compensator" aria-hidden="true">
     </div>
     <h3 className="day-separator tab-link">
       Rolando agora
@@ -66,6 +68,9 @@ const Now = ({ store: { days, favorites, actions: { toggleFavorite }} }) => (
       Em seguida
     </h3>
     <EventsOrEmpty emptyMessage="Isso é tudo por hoje, pessoal! :)" scheduleInDate={getNext(days)} favorites={favorites} toggleFavorite={toggleFavorite} />
+    <p className="empty-message">
+      Confira nossa programação completa e crie seu roteiro na aba Programação!
+    </p>
   </div>
 );
 

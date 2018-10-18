@@ -291,6 +291,7 @@ class Store extends React.Component {
       isError: days.isError,
       isListEmpty,
       favorites,
+      fullSchedule: days,
       days: filteredDays,
       actions: this.actions
     });

@@ -130,6 +130,13 @@
   }
 }
 
+.loading-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
 @import 'bootstrap/scss/bootstrap-grid.scss';
 @import 'bootstrap/scss/bootstrap-reboot.scss';
 @import 'bootstrap/scss/utilities';
