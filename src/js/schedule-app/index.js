@@ -2,7 +2,7 @@ import { CALENDAR_CONFIG } from 'config';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Store from './Store';
-import { BrowserRouter as Router, Route, withRouter, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
 import Schedule from './components/Schedule';
 import Tabs from './components/Tabs';
@@ -44,10 +44,10 @@ class ScheduleManager {
                   <Switch>
                     <Route exact path="/" render={() => <Now store={store} />} />
                     <Route exact path="/index.html" render={() => <Now store={store} />} />
-                    <Route exact path="/schedule" render={() => <Schedule key={1} store={store} />} />
+                    <Route exact path="/schedule" render={() => <Schedule key={1} currentPage="schedule" store={store} />} />
                     <Route exact path="/my-schedule" render={() => {
                       const days = store.actions.filterDays(store.days, true);
-                      return <Schedule key={2} store={{ ...store, days }} />
+                      return <Schedule currentPage="my-schedule"  key={2} store={{ ...store, days }} />
                     }}/>
                     <Route render={() => <Redirect to="/"/>} />
                   </Switch>

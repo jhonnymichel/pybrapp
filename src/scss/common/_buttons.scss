@@ -58,6 +58,7 @@
     color: $dark-blue;
     position: relative;
     z-index: 9;
+    font-size: 24px;
   }
 
   a:hover {
@@ -71,12 +72,13 @@
   &:before {
     content: '';
     position: absolute;
-    top: -50px;
-    right: -85px;
-    height: 120px;
-    width: 120px;
+    top: -40px;
+    right: -75px;
+    height: 100px;
+    width: 100px;
     display: block;
     background: url('../img/Python14-Cobras-amarelo.svg') no-repeat;
+    background-size: 100px;
   }
 }
 
@@ -181,14 +183,9 @@
   &--small {
     @extend .filters-button;
     margin-left: 0px;
-    border-radius: 50%;
-    min-width: 20px;
-    min-height: 20px;
-    width: 20px;
-    height: 20px;
     i.material-icons {
       line-height: normal;
-      font-size: 10px;
+      font-size: 14px;
     }
   }
 }

@@ -10,6 +10,7 @@ import 'isomorphic-fetch';
 import 'scrolling-element';
 import Schedule from 'app/schedule-app';
 import initReactFastclick from 'react-fastclick';
+import TransitionManager from 'app/TransitionManager';
 initReactFastclick();
 
 const routes = [
@@ -36,11 +37,20 @@ class App {
 
   onDeviceReady() {
     console.log('device is ready');
-    if (cordova.platform === 'android') {
-      StatusBar.backgroundColorByHexString("#0D273C");
-    }
     this.setupNotifications();
-    new Schedule();
+    if (cordova.platformId === 'android') {
+      const tm = new TransitionManager({
+        fadeSpeed: 120
+      });
+
+      tm.fadeContent(document.querySelector('#schedule'), 'fade-out')
+        .then(() => {
+          new Schedule();
+          tm.fadeContent(document.querySelector('#schedule'), 'fade-out');
+        })
+    } else {
+      new Schedule();
+    }
   }
 }
 

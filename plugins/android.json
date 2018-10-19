@@ -13,15 +13,15 @@
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-x-toast": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
   "dependent_plugins": {
-    "cordova-plugin-badge": {
+    "cordova-plugin-device": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-device": {
+    "cordova-plugin-badge": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   }

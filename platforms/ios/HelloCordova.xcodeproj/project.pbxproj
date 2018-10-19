@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
 		08A8BD523CFB42ACAA966AFA /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013D88BADEBA457681D9A133 /* UserNotifications.framework */; };
@@ -24,6 +23,9 @@
 		B888348C1DC24F848F7E7DA5 /* APPLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 626F306198BE4D4F8CBC699B /* APPLocalNotification.m */; };
 		D2E1F6FD344A4D37B2922D64 /* UNUserNotificationCenter+APPLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7BD4E8DF1D4340940F17AB /* UNUserNotificationCenter+APPLocalNotification.m */; };
 		F05459AA47C142BEA0948154 /* APPNotificationContent.m in Sources */ = {isa = PBXBuildFile; fileRef = A068BE2C28E244E7BCD372C5 /* APPNotificationContent.m */; };
+		1BA49034255644E29CEE4D1C /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF62CDDA1874EC59B6FD930 /* Toast+UIView.m */; };
+		5EE23ADDF7C446468063F00B /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AC889672504F419E47DC61 /* Toast.m */; };
+		C531512CE3284C43BA17DB87 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33972C0D03744AE7815D0C10 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,11 @@
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = HelloCordova/config.xml; sourceTree = "<group>"; };
 		FE7BD4E8DF1D4340940F17AB /* UNUserNotificationCenter+APPLocalNotification.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "UNUserNotificationCenter+APPLocalNotification.m"; path = "cordova-plugin-local-notification/UNUserNotificationCenter+APPLocalNotification.m"; sourceTree = "<group>"; };
+		EDF62CDDA1874EC59B6FD930 /* Toast+UIView.m */ = {isa = PBXFileReference; name = "Toast+UIView.m"; path = "cordova-plugin-x-toast/Toast+UIView.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		88AC889672504F419E47DC61 /* Toast.m */ = {isa = PBXFileReference; name = "Toast.m"; path = "cordova-plugin-x-toast/Toast.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		0BD6B5D3B1ED4B189093D5AF /* Toast+UIView.h */ = {isa = PBXFileReference; name = "Toast+UIView.h"; path = "cordova-plugin-x-toast/Toast+UIView.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		E20AEA5705274618B21C5703 /* Toast.h */ = {isa = PBXFileReference; name = "Toast.h"; path = "cordova-plugin-x-toast/Toast.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		33972C0D03744AE7815D0C10 /* QuartzCore.framework */ = {isa = PBXFileReference; name = "QuartzCore.framework"; path = "System/Library/Frameworks/QuartzCore.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +106,7 @@
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				08A8BD523CFB42ACAA966AFA /* UserNotifications.framework in Frameworks */,
 				64132FC723D24FA49F1B2D82 /* CoreLocation.framework in Frameworks */,
+				C531512CE3284C43BA17DB87 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +179,7 @@
 			children = (
 				013D88BADEBA457681D9A133 /* UserNotifications.framework */,
 				BC70E8BD596842C3BEE4105D /* CoreLocation.framework */,
+				33972C0D03744AE7815D0C10 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -213,6 +222,10 @@
 				84C24CDA401A4743A899D687 /* APPNotificationOptions.h */,
 				44752E21D4B440EE930287C5 /* UNUserNotificationCenter+APPLocalNotification.h */,
 				67D5DD1664D04644AF8A1692 /* UNNotificationRequest+APPLocalNotification.h */,
+				EDF62CDDA1874EC59B6FD930 /* Toast+UIView.m */,
+				88AC889672504F419E47DC61 /* Toast.m */,
+				0BD6B5D3B1ED4B189093D5AF /* Toast+UIView.h */,
+				E20AEA5705274618B21C5703 /* Toast.h */,
 			);
 			name = Plugins;
 			path = HelloCordova/Plugins;
@@ -348,6 +361,8 @@
 				758ACFACD285447BAE134844 /* APPNotificationOptions.m in Sources */,
 				D2E1F6FD344A4D37B2922D64 /* UNUserNotificationCenter+APPLocalNotification.m in Sources */,
 				599E9D97B5C24278A33429F9 /* UNNotificationRequest+APPLocalNotification.m in Sources */,
+				1BA49034255644E29CEE4D1C /* Toast+UIView.m in Sources */,
+				5EE23ADDF7C446468063F00B /* Toast.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,7 +29,6 @@
   left: 0px;
   width: 100%;
   padding: 12px 0px;
-  padding-top: 20px;
   display: flex;
   background-color: #0d273c;
   justify-content: center;
@@ -43,7 +42,7 @@
     }
     position: absolute;
     left: 0px;
-    top: calc(50% + 10px);
+    top: calc(50%);
     transform: translateY(-50%);
     margin-right: auto;
   }
@@ -264,7 +263,6 @@
   }
 
   .filters {
-    padding-top: 20px;
     background-color: inherit;
     color: white;
     background-color: $dark-blue;
@@ -412,7 +410,7 @@
     .favorite {
       background-color: #0A1F31;
       position: relative;
-      padding-right: 30px;
+      padding-right: 40px;
       transition: background-color 300ms ease-in-out;
       &:after {
         font-family: 'Material Icons';

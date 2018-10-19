@@ -11,6 +11,7 @@ import Transition from 'react-transition-group/Transition';
 import EmptyList from './EmptyList';
 import { getFormattedTime } from 'app/schedule-app/utils';
 import { FilterBox, CategoryFilter, EventTypeFilter } from './filters';
+import { timingSafeEqual } from 'crypto';
 
 class Schedule extends React.Component {
   get styles() {
@@ -82,12 +83,18 @@ class Schedule extends React.Component {
     this.anchors = new ScrollNavigation({
       offset: -anchorsOffset
     });
+    this.amountOfDays = 0;
+    if (this.props.store.days) {
+      for (let key in this.props.store.days) {
+        this.amountOfDays += this.props.store.days[key].length;
+      }
+    }
+
     setTimeout(this.anchors.start.bind(this.anchors), 300);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    setTimeout(this.anchors.start.bind(this.anchors), 300);
-    if (this.props.store.days && window.location.pathname !== '/my-schedule') {
+    if (this.props.store.days && this.props.currentPage!=='my-schedule') {
       let items = 0;
       for (let key in this.props.store.days) {
         items += this.props.store.days[key].length;
@@ -134,7 +141,7 @@ class Schedule extends React.Component {
                     </button>
                     <h2>Filtrar</h2>
                   </header>
-                  <div className="app-bar-conpensator" aria-hidden="true">
+                  <div className="app-bar-compensator" aria-hidden="true">
                   </div>
                   <div className="advanced-filters-wrapper">
                     <h3>Categoria</h3>
@@ -154,12 +161,12 @@ class Schedule extends React.Component {
               </div>
               <div style={{paddingTop: 122}}>
                 <p className="empty-message--small">
-                  { window.location.pathname === '/schedule' ?
+                  { this.props.currentPage === 'schedule' ?
                      (!store.isListEmpty && 'Toque em um evento para adicioná-lo as suas marcações e receber notificações.' || '') :
                      (store.favorites.length && 'Toque em um evento para removê-lo de sua lista e cancelar notificações.' || '')
                   }
                 </p>
-                {window.location.pathname === '/my-schedule' && !store.favorites.length && <EmptyList message="Você ainda não marcou nenhuma palestra. Na aba Palestras você pode fazer isso."/>}
+                {this.props.currentPage === 'my-schedule' && !store.favorites.length && <EmptyList message="Você ainda não marcou nenhuma palestra. Na aba Palestras você pode fazer isso."/>}
                 {store.isListEmpty && <EmptyList message="Nenhum resultado encontrado. Altere os termos de sua pesquisa e cheque os filtros aplicados."/>}
                 {store.isError && <EmptyList message="Houve um problema ao carregar os dados. Verifique sua conexão com a internet"/>}
                 {!store.isError && map(store.days, (day, label) => (

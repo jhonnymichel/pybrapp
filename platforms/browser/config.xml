@@ -16,7 +16,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <preference name="StatusBarOverlaysWebView" value="true" />
-    <preference name="StatusBarBackgroundColor" value="#102E46" />
+    <preference name="StatusBarBackgroundColor" value="#0D273C" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="BackgroundColor" value="0x102E46" />
 </widget>
