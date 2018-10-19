@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="x86"
-    api-level="28"
+    abi="armeabi-v7a,armeabi"
+    api-level="26"
     build-mode="COLD"
-    density="420dpi"
+    density="xxhdpi"
     format="10"
-    plugin-version="3.0.1"
-    timestamp="1539924236065"
+    plugin-version="3.2.1"
+    timestamp="1539977252099"
     token="-2839459256624261717"
     verifier="COLD_SWAP_REQUESTED" >
 
@@ -23,27 +23,35 @@
         name="verifier"
         duration="0" />
 
+    <artifact
+        location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
+        type="SPLIT_MAIN" />
+
     <build
         build-mode="FULL"
-        timestamp="1539923009663"
+        ir-eligibility="FIELD_TYPE_CHANGE"
+        timestamp="1539976415240"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
+            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
             type="SPLIT" />
         <artifact
-            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
+            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
             type="SPLIT" />
         <artifact
             location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
             type="SPLIT" />
         <artifact
+            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
+            type="SPLIT" />
+        <artifact
             location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
             type="SPLIT" />
         <artifact
-            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
+            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
             type="SPLIT" />
         <artifact
-            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
+            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
             type="SPLIT" />
         <artifact
             location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
@@ -61,33 +69,16 @@
             location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
             type="SPLIT" />
         <artifact
-            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/outputs/apk/debug/app-debug.apk"
+            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
             type="SPLIT_MAIN" />
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="CLASS_ADDED"
-        timestamp="1539923116154"
+        timestamp="1539977252099"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
-            type="SPLIT" />
-    </build>
-    <build
-        build-mode="COLD"
-        ir-eligibility="COMPATIBLE"
-        timestamp="1539923423143"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
-            type="SPLIT" />
-        <artifact
-            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/outputs/apk/debug/app-debug.apk"
+            location="/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
             type="SPLIT_MAIN" />
     </build>
-    <build
-        build-mode="COLD"
-        timestamp="1539924236065"
-        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>

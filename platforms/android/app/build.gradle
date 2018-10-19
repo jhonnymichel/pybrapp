@@ -26,10 +26,11 @@ buildscript {
             url "https://maven.google.com"
         }
         jcenter()
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.2.1'
     }
 }
 
@@ -91,8 +92,8 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
-apply from: "../cordova-plugin-badge/hellocordova-badge.gradle"
-apply from: "../cordova-plugin-local-notification/hellocordova-localnotification.gradle"
+apply from: "../cordova-plugin-badge/pybr2018-badge.gradle"
+apply from: "../cordova-plugin-local-notification/pybr2018-localnotification.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()

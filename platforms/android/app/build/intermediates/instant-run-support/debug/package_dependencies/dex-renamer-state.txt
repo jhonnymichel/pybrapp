@@ -1,4 +1,4 @@
-#Fri Oct 19 01:23:45 BRT 2018
-base.0=/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/transforms/dexMerger/debug/30
+#Fri Oct 19 02:11:58 BRT 2018
+base.0=/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/transforms/dexMerger/debug/10
 path.0=classes.dex
 renamed.0=classes.dex

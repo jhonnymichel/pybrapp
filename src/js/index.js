@@ -38,19 +38,7 @@ class App {
   onDeviceReady() {
     console.log('device is ready');
     this.setupNotifications();
-    if (cordova.platformId === 'android') {
-      const tm = new TransitionManager({
-        fadeSpeed: 120
-      });
-
-      tm.fadeContent(document.querySelector('#schedule'), 'fade-out')
-        .then(() => {
-          new Schedule();
-          tm.fadeContent(document.querySelector('#schedule'), 'fade-out');
-        })
-    } else {
-      new Schedule();
-    }
+    new Schedule();
   }
 }
 

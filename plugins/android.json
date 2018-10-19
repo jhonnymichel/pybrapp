@@ -8,21 +8,24 @@
   },
   "installed_plugins": {
     "cordova-plugin-local-notification": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "org.pythonbrasil.pybr2018"
     },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "org.pythonbrasil.pybr2018"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "org.pythonbrasil.pybr2018"
     },
     "cordova-plugin-x-toast": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "org.pythonbrasil.pybr2018"
     }
   },
   "dependent_plugins": {
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
     "cordova-plugin-badge": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "org.pythonbrasil.pybr2018"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "org.pythonbrasil.pybr2018"
     }
   }
 }
