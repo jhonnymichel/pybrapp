@@ -4,7 +4,7 @@
             "outputFile": "/Users/jhonny/src/pybr2018/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-bg/values-bg.xml",
             "map": [
                 {
-                    "source": "/Users/jhonny/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/c33850da68d94d6b79a1912724679a0f/res/values-bg/values-bg.xml",
+                    "source": "/Users/jhonny/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/d20b7e036c9eaebea55362c62f26e4db/res/values-bg/values-bg.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
