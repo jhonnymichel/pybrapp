@@ -1,6 +1,8 @@
 import React from 'react';
 import Events from './Events';
 import moment from 'moment-timezone';
+import logo from 'img/logo_horizontal.svg';
+import { Link } from 'react-router-dom';
 
 function getNow(days) {
   const today = moment().tz('America/Fortaleza').date();
@@ -60,6 +62,7 @@ const Now = ({ store: { fullSchedule: days, favorites, actions: { toggleFavorite
     </div>
     <div className="app-bar-compensator" aria-hidden="true">
     </div>
+    <img src={logo} width="70%" style={{maxWidth: 300, display: 'block', margin: '10px auto'}} height="auto" alt="Python Brasil 2018, edição 14 Logo"/>
     <h3 className="day-separator tab-link">
       Rolando agora
     </h3>
@@ -67,10 +70,14 @@ const Now = ({ store: { fullSchedule: days, favorites, actions: { toggleFavorite
     <h3 className="day-separator tab-link">
       Em seguida
     </h3>
-    <EventsOrEmpty emptyMessage="Isso é tudo por hoje, pessoal! :)" scheduleInDate={getNext(days)} favorites={favorites} toggleFavorite={toggleFavorite} />
-    <p className="empty-message">
-      Confira nossa programação completa e crie seu roteiro na aba Programação!
-    </p>
+    <EventsOrEmpty emptyMessage="Isso é tudo por hoje. Hora de curtir o happy hour!" scheduleInDate={getNext(days)} favorites={favorites} toggleFavorite={toggleFavorite} />
+    <div className="intern-page-content event-button-area">
+      <div className="sponsor-button snake-button">
+        <Link to="/schedule" className="pybr-button">
+          <span>Monte sua</span> programação
+        </Link>
+      </div>
+    </div>
   </div>
 );
 

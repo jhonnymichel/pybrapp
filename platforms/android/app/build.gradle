@@ -91,8 +91,8 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
-apply from: "../cordova-plugin-badge/hellocordova-badge.gradle"
-apply from: "../cordova-plugin-local-notification/hellocordova-localnotification.gradle"
+apply from: "../cordova-plugin-badge/pybr14-badge.gradle"
+apply from: "../cordova-plugin-local-notification/pybr14-localnotification.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()

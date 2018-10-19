@@ -101,8 +101,10 @@ class Store extends React.Component {
       const favorites = JSON.parse(localStorage.getItem('favoriteTalks')) || [];
       if (!favorites.includes(id)) {
         favorites.push(id);
+        window.plugins.toast.showShortBottom('Adicionado aos eventos salvos.');
         this.scheduleNotification(event, date);
       } else {
+        window.plugins.toast.showShortBottom('Removido dos eventos salvos.');
         favorites.splice(favorites.indexOf(id), 1);
         this.cancelNotification(id);
       }

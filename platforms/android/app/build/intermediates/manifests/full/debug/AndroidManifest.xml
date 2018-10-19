@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.cordova.hellocordova"
+    package="com.jhonnymichel.pybr14"
     android:hardwareAccelerated="true"
     android:versionCode="10000"
     android:versionName="1.0.0" >
@@ -47,9 +47,10 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
-        android:supportsRtl="true" >
+        android:supportsRtl="true"
+        android:testOnly="true" >
         <activity
-            android:name="io.cordova.hellocordova.MainActivity"
+            android:name="com.jhonnymichel.pybr14.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:label="@string/activity_name"
             android:launchMode="singleTop"
@@ -64,7 +65,7 @@
 
         <provider
             android:name="de.appplant.cordova.plugin.notification.util.AssetProvider"
-            android:authorities="io.cordova.hellocordova.provider"
+            android:authorities="com.jhonnymichel.pybr14.provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data

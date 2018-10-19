@@ -27486,7 +27486,7 @@ var ScheduleManager = function () {
         { data: data },
         function (store) {
           return _react2.default.createElement(
-            _reactRouterDom.BrowserRouter,
+            _reactRouterDom.HashRouter,
             { onUpdate: _this.handleUpdate },
             _react2.default.createElement(
               _react2.default.Fragment,
@@ -27501,11 +27501,11 @@ var ScheduleManager = function () {
                     return _react2.default.createElement(_Now2.default, { store: store });
                   } }),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/schedule', render: function render() {
-                    return _react2.default.createElement(_Schedule2.default, { key: 1, store: store });
+                    return _react2.default.createElement(_Schedule2.default, { key: 1, currentPage: 'schedule', store: store });
                   } }),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/my-schedule', render: function render() {
                     var days = store.actions.filterDays(store.days, true);
-                    return _react2.default.createElement(_Schedule2.default, { key: 2, store: Object.assign({}, store, { days: days }) });
+                    return _react2.default.createElement(_Schedule2.default, { currentPage: 'my-schedule', key: 2, store: Object.assign({}, store, { days: days }) });
                   } }),
                 _react2.default.createElement(_reactRouterDom.Route, { render: function render() {
                     return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
@@ -44280,8 +44280,7 @@ var Schedule = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
-      setTimeout(this.anchors.start.bind(this.anchors), 300);
-      if (this.props.store.days && window.location.pathname !== '/my-schedule') {
+      if (this.props.store.days && this.props.currentPage !== 'my-schedule') {
         var items = 0;
         for (var key in this.props.store.days) {
           items += this.props.store.days[key].length;
@@ -44349,7 +44348,7 @@ var Schedule = function (_React$Component) {
                     'Filtrar'
                   )
                 ),
-                _react2.default.createElement('div', { className: 'app-bar-conpensator', 'aria-hidden': 'true' }),
+                _react2.default.createElement('div', { className: 'app-bar-compensator', 'aria-hidden': 'true' }),
                 _react2.default.createElement(
                   'div',
                   { className: 'advanced-filters-wrapper' },
@@ -44382,9 +44381,9 @@ var Schedule = function (_React$Component) {
               _react2.default.createElement(
                 'p',
                 { className: 'empty-message--small' },
-                window.location.pathname === '/schedule' ? !store.isListEmpty && 'Toque em um evento para adicioná-lo as suas marcações e receber notificações.' || '' : store.favorites.length && 'Toque em um evento para removê-lo de sua lista e cancelar notificações.' || ''
+                _this3.props.currentPage === 'schedule' ? !store.isListEmpty && 'Toque em um evento para adicioná-lo as suas marcações e receber notificações.' || '' : store.favorites.length && 'Toque em um evento para removê-lo de sua lista e cancelar notificações.' || ''
               ),
-              window.location.pathname === '/my-schedule' && !store.favorites.length && _react2.default.createElement(_EmptyList2.default, { message: 'Voc\xEA ainda n\xE3o marcou nenhuma palestra. Na aba Palestras voc\xEA pode fazer isso.' }),
+              _this3.props.currentPage === 'my-schedule' && !store.favorites.length && _react2.default.createElement(_EmptyList2.default, { message: 'Voc\xEA ainda n\xE3o marcou nenhuma palestra. Na aba Palestras voc\xEA pode fazer isso.' }),
               store.isListEmpty && _react2.default.createElement(_EmptyList2.default, { message: 'Nenhum resultado encontrado. Altere os termos de sua pesquisa e cheque os filtros aplicados.' }),
               store.isError && _react2.default.createElement(_EmptyList2.default, { message: 'Houve um problema ao carregar os dados. Verifique sua conex\xE3o com a internet' }),
               !store.isError && (0, _map2.default)(store.days, function (day, label) {
@@ -51646,6 +51645,12 @@ var _momentTimezone = __webpack_require__(133);
 
 var _momentTimezone2 = _interopRequireDefault(_momentTimezone);
 
+var _logo_horizontal = __webpack_require__(565);
+
+var _logo_horizontal2 = _interopRequireDefault(_logo_horizontal);
+
+var _reactRouterDom = __webpack_require__(257);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function getNow(days) {
@@ -51730,6 +51735,7 @@ var Now = function Now(_ref) {
       )
     ),
     _react2.default.createElement('div', { className: 'app-bar-compensator', 'aria-hidden': 'true' }),
+    _react2.default.createElement('img', { src: _logo_horizontal2.default, width: '70%', style: { maxWidth: 300, display: 'block', margin: '10px auto' }, height: 'auto', alt: 'Python Brasil 2018, edi\xE7\xE3o 14 Logo' }),
     _react2.default.createElement(
       'h3',
       { className: 'day-separator tab-link' },
@@ -51741,11 +51747,24 @@ var Now = function Now(_ref) {
       { className: 'day-separator tab-link' },
       'Em seguida'
     ),
-    _react2.default.createElement(EventsOrEmpty, { emptyMessage: 'Isso \xE9 tudo por hoje, pessoal! :)', scheduleInDate: getNext(days), favorites: favorites, toggleFavorite: toggleFavorite }),
+    _react2.default.createElement(EventsOrEmpty, { emptyMessage: 'Isso \xE9 tudo por hoje. Hora de curtir o happy hour!', scheduleInDate: getNext(days), favorites: favorites, toggleFavorite: toggleFavorite }),
     _react2.default.createElement(
-      'p',
-      { className: 'empty-message' },
-      'Confira nossa programa\xE7\xE3o completa e crie seu roteiro na aba Programa\xE7\xE3o!'
+      'div',
+      { className: 'intern-page-content event-button-area' },
+      _react2.default.createElement(
+        'div',
+        { className: 'sponsor-button snake-button' },
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/schedule', className: 'pybr-button' },
+          _react2.default.createElement(
+            'span',
+            null,
+            'Monte sua'
+          ),
+          ' programa\xE7\xE3o'
+        )
+      )
     )
   );
 };
@@ -51778,7 +51797,7 @@ var EmptyList = function EmptyList(_ref) {
   return _react2.default.createElement(
     'div',
     { className: 'empty-list' },
-    _react2.default.createElement('img', { src: _loading2.default, alt: 'Lista vazia' }),
+    _react2.default.createElement('img', { src: _loading2.default, alt: 'Lista vazia', width: '75px', height: 'auto' }),
     _react2.default.createElement(
       'p',
       { className: 'empty-message--small' },
@@ -51794,6 +51813,12 @@ exports.default = EmptyList;
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "./assets/loading.svg";
+
+/***/ }),
+/* 565 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "./assets/logo_horizontal.svg";
 
 /***/ })
 /******/ ]);
