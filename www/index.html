@@ -28,7 +28,7 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+        <meta http-equiv="Content-Security-Policy" content="default-src * gap://ready file:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta charset="utf-8">
@@ -40,7 +40,7 @@
 <div id="content" class="container-fluid p-0">
   <section class="schedule-page">
     <div class="schedule-page__content">
-      <div id="schedule">
+      <div id="schedule" class="transition--opacity">
         <img class="loading-image" src="./assets/empty.svg" width="250px" height="auto">
       </div>
     </div>

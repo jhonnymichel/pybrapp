@@ -9,6 +9,19 @@ import Tabs from './components/Tabs';
 import Now from './components/Now';
 
 const TabsWithRouter = withRouter(Tabs);
+
+const ScrollToTop = withRouter(class extends React.Component {
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      window.scrollTo(0, 0)
+    }
+  }
+
+  render() {
+    return this.props.children
+  }
+});
+
 class ScheduleManager {
   getSchedule() {
     const { apiKey, calendarId } = CALENDAR_CONFIG;
@@ -30,17 +43,13 @@ class ScheduleManager {
     });
   }
 
-  handleUpdate() {
-    window.scrollTo(0, 0);
-  }
-
   constructor() {
     this.getSchedule().then(data => {
       ReactDOM.render(
           <Store data={data}>
             {store => (
-              <Router onUpdate={this.handleUpdate}>
-                <React.Fragment>
+              <Router>
+                <ScrollToTop>
                   <Switch>
                     <Route exact path="/" render={() => <Now store={store} />} />
                     <Route exact path="/index.html" render={() => <Now store={store} />} />
@@ -52,7 +61,7 @@ class ScheduleManager {
                     <Route render={() => <Redirect to="/"/>} />
                   </Switch>
                   <TabsWithRouter/>
-                </React.Fragment>
+                </ScrollToTop>
               </Router>
             )}
           </Store>,

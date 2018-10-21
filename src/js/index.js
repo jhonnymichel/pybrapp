@@ -10,6 +10,7 @@ import 'isomorphic-fetch';
 import 'scrolling-element';
 import Schedule from 'app/schedule-app';
 import initReactFastclick from 'react-fastclick';
+import TransitionManager from 'app/TransitionManager';
 initReactFastclick();
 
 const routes = [
@@ -36,9 +37,6 @@ class App {
 
   onDeviceReady() {
     console.log('device is ready');
-    if (cordova.platform === 'android') {
-      StatusBar.backgroundColorByHexString("#0D273C");
-    }
     this.setupNotifications();
     new Schedule();
   }
